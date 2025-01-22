@@ -3,144 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
     <title>Document</title>
 </head>
 <body>
-    <div class="navbar-fixed">
-        <nav class="black white-text">
-          <div class="nav-wrapper">
-            <a href="#!" class="brand-logo righteous" id="navLogo">Ian Arsenault</a>
-            <a href="#" data-activates="mobile-demo" class="button-collapse" id="hamburger"><i class="material-icons">menu</i></a>
-            <ul class="right hide-on-med-and-down" id="rightBtns">
-              <li><a href="sass.html" id="navBtns">Portfolio</a></li>
-              <li><a href="collapsible.html" class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Click for more Javascript projects" id="navBtns">Javascript</a></li>
-              <li><a href="mobile.html" id="navBtns"><i class="material-icons right">fast_forward</i>Next Project</a></li>
-            </ul>
-            <ul class="side-nav black" id="mobile-demo">
-              <li class="right-align"><a href="#" id="exit"><span id="close-hvr">X</span></a></li>
-              <li><a href="sass.html" id="side-navBtns">Portfolio</a></li>
-              <li><a href="badges.html" id="side-navBtns">Javascript</a></li>
-              <li><a href="mobile.html" id="side-navBtns"><i class="material-icons right">fast_forward</i>Next Project</a></li>
-            </ul>
-          </div>
-        </nav>
-      </div>
+    <style>
+        :root {
+          --width: 4;
+          --length: 4;
+        }
+      </style>
       
-      <!-- Header / Title of Project -->
-      <h1 class="righteous center-align">Random Grid Generator</h1>
+      <body>
+        <div class="about-container">
+          <h1>Garden Planner</h1>
+          <p>This is a simple garden planner proof of concept. The idea is that you divide your planterbed into 1' x 1' squares and plant something specific. Eventually i plan on tieing into an API that will provide options for plants and varieties, as well as suggestions for spacing to calculate how man can be planeted in each square, as well as complimentary crops.</p>
+          <h2>Lets Setup your bed!</h2>
+          <p>What we do is we take the width (👈 to 👉) and length (👆 to 👇), and then we will calculate out the number of cells you can plant</p>
       
-      <!-- Information Section - Provides details to Language - Objective - Example of what it's supposed to look like -->
-      <div class="row">
-        <div class="col s10 offset-s1 col m6 offset-m3 z-depth-2 blue-grey darken-3">
-          <ul class="collapsible" data-collapsible="accordion">
-            <li>
-              <div class="collapsible-header" id="infoAccordian"><i class="material-icons">info_outline</i>Language</div>
-              <div class="collapsible-body center-align grey lighten-4">
-                <h5>Advanced Javascript SE251</h5>
-                <h6>Spring 2016 - New England Institute of Technology</h6>
-                <h6>Assignment: Lab 2</h6>
-                <ul>
-                  <li><strong>HTML</strong></li>
-                  <li><strong>CSS</strong></li>
-                  <li><strong>Javascript</strong></li>
-                </ul>
-              </div>
-            </li>
-            <li>
-              <div class="collapsible-header" id="infoAccordian"><i class="material-icons">assignment</i>Objective</div>
-              <div class="collapsible-body grey lighten-4">
-                <h5 class="center-align">Objective:</h5>
-                <p>Create a form with a textbox and a button. The textbox can hold a number that will represent the number of rows and columns in a table. Once the submit button is clicked you will generate a two dimensional array with each of the elements of
-                  the array holding a random number between 1 and 100. After creating the array you will loop through it and the number is a multiple of 3, display the cell with a
-                  <span class="red-text">red</span> background color; if not a multiple of 3 but a multiple of 2, display the cell with a <span class="blue-text">blue</span> background.</p>
-                <div class="center-align"><strong>Extras:</strong> Alert user if entry is not a number (NaN)<br />Alert user to the number they submitted</div>
+          <label for="width">how many feet wide is your planter?</label>
+          <input id="planter-width" name="width" type="number" placeholder="4'">
+          <br>
+          <label for="length">how many feet long is your planter?
       
-              </div>
-            </li>
-            <li>
-              <div class="collapsible-header" id="infoAccordian"><i class="material-icons">aspect_ratio</i>Example</div>
-              <div class="collapsible-body center-align grey lighten-4">
-                <img class="z-depth-1" src="http://i64.tinypic.com/im4iv4.png" alt="gridExample">
-              </div>
-            </li>
-          </ul>
-      
-        </div>
-      </div>
-      <br /><br />
-      
-      <!-- Input Section -->
-      <section class="section grey lighten-2">
-        <div id="mainDiv">
-          <div class="row white z-depth-1" id="inputWhite">
-            <div class="input-field col s8 offset-s2  col m4 offset-m2 col l4 offset-l2 ">
-              <form name="numberForm" id="form">
-                <input id="myNo" type="text" class="validate" name="num">
-                <label class="active" for="myNo">Enter a Number</label>
-              </form>
-            </div>
-            <div class="input-field col s10 offset-s1 col m3 offset-m1 center-align">
-              <!--<input type="button" class="waves-effect waves-light btn" id="gridSize" value="Show It" />-->
-              <button class="btn waves-effect waves-light grey darken-3 hvr-underline-from-center" type="submit" name="action" id="gridSize">Generate Grid
-                          <i class="material-icons right">view_module</i>
-                      </button>
-            </div>
-          </div>
+          </label>
+          <input id="planter-length" name="length" type="number" placeholder="4'">
         </div>
       
+        </div>
         <div class="container">
-          <!-- Display the Randomly Generated Grid -->
-          <div id="result" class="z-depth-5"></div>
-          <br><br>
-          <!-- Display the grid average -->
-          <div id="gridAverage"></div>
-        </div>
-        
-        
-        
-      
-      <footer class="page-footer black white-text">
-          <div class="container">
-              <div class="row">
-                  <div class="col m6 offset-m3 col l6 offset-l3">
-                      <h5 class="white-text center-align">About this Project</h5>
-                      <p class="grey-text text-lighten-4 center-align">This project was
-                          <a href="http://ict.neit.edu/001241129/public_html/se251/ianawebsite/assignments/Assignment1/assignment1.html" target="_blank" class="foot-hvr">originally built</a>
-                          for my Advanced Javascript course this past Spring. Now I'm going through each project and doing a complete re-design using <a href="http://materializecss.com/" target="_blank" class="foot-hvr">Materialize CSS </a>framework.
-                      </p>
-                  </div>
+          <div class="garden-bed">
+            <div class="garden-item"></div>
+            <div class="garden-item"></div>
+            <div class="garden-item"></div>
+            <div class="garden-item"></div>
+            <div class="garden-item"></div>
+            <div class="garden-item"></div>
+            <div class="garden-item"></div>
+            <div class="garden-item"></div>
+            <div class="garden-item"></div>
+            <div class="garden-item"></div>
+            <div class="garden-item"></div>
+            <div class="garden-item"></div>
+            <div class="garden-item"></div>
+            <div class="garden-item"></div>
+            <div class="garden-item"></div>
+            <div class="garden-item"></div>
           </div>
-          <div class="footer-copyright">
-              <div class="container center-align">
-                  &copy; 2016 Copyright <a class="modal-trigger foot-hvr" href="#modal1">Ian Arsenault</a>
-                  <!-- Modal Structure -->
-                  <div id="modal1" class="modal">
-                      <div class="modal-content black-text">
-                          <h4 id="orbitron">Ian Arsenault</h4>
-                          <hr />
-                          <ul>
-                              <!-- Ians Contact Information -->
-                              <a href="https://www.linkedin.com/in/ian-arsenault-074a54b7" target="_blank">
-                                  <img class="hvr-buzz-out"  height="50" width="50" src="https://cdn3.iconfinder.com/data/icons/free-social-icons/67/linkedin_circle_black-512.png" />&nbsp;
-                              </a>
-                              <a href="https://codepen.io/zzzian/" target="_blank">
-                                  <img height="50" width="50" class="hvr-pop" src="https://i.imgur.com/hvih5tG.png" />&nbsp;
-                              </a>
-                              <a href="https://github.com/GorgonsMaze" target="_blank">
-                                  <img height="50" width="50" class="hvr-wobble-top"  src="https://i.imgur.com/Bb4tAnP.png" />&nbsp;
-                              </a>
-                              <a href="mailto:ian_arsenault@protonmail.com" target="_blank">
-                                  <img height="50" width="50" class="hvr-rotate " src="https://openclipart.org/image/2400px/svg_to_png/216530/Mail-Icon-White-on-Black.png" />&nbsp;
-                              </a>
-                          </ul>
-      
-                      </div>
-                      <div class="modal-footer">
-                          <a href="#!" class=" modal-action modal-close waves-effect waves-orange btn-flat">Thank You</a>
-                      </div>
-                  </div>
-              </div>
-      </footer>
+        </div>
+      </body>
 </body>
 </html>
