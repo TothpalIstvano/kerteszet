@@ -22,7 +22,7 @@ body {
     
     .container {
       height: 100%;
-      width: calc(var(--width) * 100px);
+      width: calc(var(--width) * 60px);
       margin: auto;
     }
     
@@ -42,7 +42,7 @@ body {
         align-items: center;
         -ms-flex-pack: center;
         justify-content: center;
-        min-height: 3rem;
+        min-height: 1rem;
         padding: .75rem;
         background-color: #8c7851;
     }

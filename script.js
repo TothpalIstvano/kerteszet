@@ -42,3 +42,24 @@ function setPlanterSize() {
         planter.appendChild(planterRow);
     }
 }
+
+
+
+document.getElementById('add-plant').addEventListener('click', () => {
+  const plant = document.getElementById('plant').value;
+  const quantity = document.getElementById('quantity').value;
+  const li = document.createElement('li');
+  li.textContent = `${quantity} x ${plant}`;
+
+  const deleteBtn = document.createElement('button');
+  deleteBtn.textContent = 'Delete';
+  deleteBtn.onclick = () => li.remove();
+  li.appendChild(deleteBtn);
+
+  document.getElementById('plant-list').appendChild(li);
+});
+
+document.getElementById('extend-db').addEventListener('click', () => {
+  // Code to extend the database goes here
+  alert("Extend database functionality not yet implemented.");
+});
