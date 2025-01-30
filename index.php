@@ -1,7 +1,7 @@
 <?php
 $server = "localhost";
 $user = "root";
-$pass = "";
+$pass = "mysql";
 $dbase = "kert";
 
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
@@ -34,8 +34,22 @@ if (!$conn) {
       <label for="length">How many feet long is your planter?</label>
       <input id="planter-length" name="length" type="number" value="1" min="1">
       <br>
-      <button id="submit" type="button" onclick="setPlanterSize()">Help</button>
-  </div>
+    <label for="plant">Choose a plant:</label>
+      <select id="plant" name="plant">
+        <option value="Tomato">Tomato</option>
+        <option value="Carrot">Carrot</option>
+        <option value="Lettuce">Lettuce</option>
+      </select>
+      <br>
+      <label for="quantity">Quantity:</label>
+      <input id="quantity" name="quantity" placeholder="1" type="number" value="1" min="1">
+      <br>
+      <button id="add-plant">Add Plant</button>
+      <button id="extend-db" onclick="extendDB()">Extend Database</button>
+      
+    <ul id="plant-list"></ul>
+
+      </div>
 
   <div class="container">
     <div class="garden-bed"></div>
