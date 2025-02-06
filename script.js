@@ -59,7 +59,34 @@ document.getElementById('add-plant').addEventListener('click', () => {
   document.getElementById('plant-list').appendChild(li);
 });
 
-document.getElementById('extend-db').addEventListener('click', () => {
-  // Code to extend the database goes here
-  alert("Extend database functionality not yet implemented.");
-});
+function extendDB() {
+  const width = document.getElementById('planter-width').value;
+  const length = document.getElementById('planter-length').value;
+  const plant = document.getElementById('plant').value;
+  const quantity = document.getElementById('quantity').value;
+
+  const formData = new URLSearchParams();
+  formData.append('planter_width', width);
+  formData.append('planter_length', length);
+  formData.append('plant', plant);
+  formData.append('quantity', quantity);
+  formData.append('action', 'extend');
+
+  fetch('extend_db.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: formData
+  })
+  .then(response => response.text())
+  .then(data => alert(data))
+  .catch(error => console.error('Error:', error));
+}
+
+document.getElementById('extend-db').addEventListener('click', extendDB);
+
+function feltolt() {
+  fetch('feltolt.php')
+  .then(response => response.text())
+  .then(data => alert(data))
+  .catch(error => console.error('Error:', error));
+}
