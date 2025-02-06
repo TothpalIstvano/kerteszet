@@ -18,7 +18,9 @@ if (!$conn) {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="style.css">
+  <style>
+    <?php include 'style.css'; ?>
+  </style>
   <title>Garden Planner</title>
 </head>
 <body>
@@ -34,17 +36,21 @@ if (!$conn) {
       <label for="length">How many feet long is your planter?</label>
       <input id="planter-length" name="length" type="number" value="1" min="1">
       <br>
-    <label for="plant">Choose a plant:</label>
+    <label for="plant">Növény kiválasztása:</label>
       <select id="plant" name="plant">
-        <option value="Tomato">Tomato</option>
-        <option value="Carrot">Carrot</option>
-        <option value="Lettuce">Lettuce</option>
+        <?php 
+          $sql = "SELECT name FROM plants";
+          $result = mysqli_query($conn, $sql);
+          foreach ($result as $row) {
+            echo "<option value='" . $row['name'] . "'>" . $row['name'] . "</option>";
+          }
+        ?>
       </select>
       <br>
-      <label for="quantity">Quantity:</label>
+      <label for="quantity">Mennyiség:</label>
       <input id="quantity" name="quantity" placeholder="1" type="number" value="1" min="1">
       <br>
-      <button id="add-plant">Add Plant</button>
+      <button id="add-plant">Nyövény hozzáadása</button>
       <button id="extend-db" onclick="extendDB()">Extend Database</button>
       
     <ul id="plant-list"></ul>
@@ -54,10 +60,20 @@ if (!$conn) {
   <div class="container">
     <div class="garden-bed"></div>
   </div>
-
-  <script src="script.js"></script>
+  <script>
+      <?php include 'script.js'; ?>
+  </script>
 </body>
 </html>
 <?php
 mysqli_close($conn);
+?>
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (isset($_POST['planter_width']) && isset($_POST['planter_length'])) {
+        $width = intval($_POST['planter_width']) ?: 1;
+        $length = intval($_POST['planter_length']) ?: 1;
+        $count = $width * $length;
+    }
+}
 ?>
