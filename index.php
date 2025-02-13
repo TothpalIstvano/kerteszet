@@ -52,6 +52,7 @@ if (!$conn) {
       <br>
       <button id="add-plant">Nyövény hozzáadása</button>
       <button id="extend-db" onclick="extendDB()">Extend Database</button>
+
       
     <ul id="plant-list"></ul>
 

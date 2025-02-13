@@ -2,7 +2,7 @@
 $server = "localhost";
 $user = "root";
 $pass = "mysql";
-$dbase = "kert";
+$dbase = "kert4";
 
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 $conn = mysqli_connect($server, $user, $pass, $dbase);
@@ -12,7 +12,7 @@ if (!$conn) {
 }
 
 // Új növény hozzáadása az adatbázishoz
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+/*if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST['planter_width']) && isset($_POST['planter_length'])) {
         $width = intval($_POST['planter_width']) ?: 1;
         $length = intval($_POST['planter_length']) ?: 1;
@@ -48,7 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 
-mysqli_close($conn);
+mysqli_close($conn);*/
 ?>
 
 <!DOCTYPE html>
@@ -68,51 +68,84 @@ mysqli_close($conn);
     <h2>Let's Set Up Your Bed!</h2>
     <p>What we do is take the width (👈 to 👉) and length (👆 to 👇)...</p>
     
-    <form method="POST">
+    
       <label for="width">How many feet wide is your planter?</label>
       <input id="planter-width" name="planter_width" type="number" value="1" min="1">
       <br>
       <label for="length">How many feet long is your planter?</label>
       <input id="planter-length" name="planter_length" type="number" value="1" min="1">
       <br>
-      <label for="plant">Choose a plant:</label>
+      <label for="plant">Növény kiválasztása:</label>
       <select id="plant" name="plant">
-        <option value="Bab">Bab</option>
-        <option value="Uborka">Uborka</option>
-        <option value="Paradicsom">Paradicsom</option>
-        <option value="Saláta">Saláta</option>
+        <?php 
+          $sql = "SELECT Nev FROM Faj";
+          $result = mysqli_query($conn, $sql);
+          foreach ($result as $row) {
+            echo "<option value='" . $row['Nev'] . "'>" . $row['Nev'] . "</option>";
+          }
+        ?>
       </select>
       <br>
-      <label for="quantity">Quantity:</label>
+      <label for="quantity">Mennyiség:</label>
       <input id="quantity" name="quantity" placeholder="1" type="number" value="1" min="1">
       <br>
-      <button type="submit">Add Plant</button>
+      <button id="add-plant">Nyövény hozzáadása</button>
+      <button id="extend-db" onclick="extendDB()">Extend Database</button>
+
+    <form method="POST" action="addproba.php">
+        <table>
+            <tr>
+                <td>Növény neve: </td>
+                <td><input type="text" name = "novNev" id = "novNev" maxlength = "50"></td>
+            </tr>
+            <tr>
+                <td>Növény latin neve: </td>
+                <td><input type="text" name="novLatin" id="novLatin"></td>
+            </tr>
+            <tr>
+                <td>Növény sortávolsága: </td>
+                <td><input type="number" name="sortav" id="sortav"></td>
+            </tr>
+            <tr>
+                <td>Növény tőtávolsága: </td>
+                <td><input type="number" name="totav" id="totav"></td>
+            </tr>
+            <tr>
+                <td>Fajta: </td>
+                <td><input type="text" name="fajta" id="fajta"></td>
+            </tr>
+            <!-- kéne még: fajta id auto increment +1, hogy hozzáadásnál az is fel legyen véve az adatbázisba-->
+            <tr style = "text-align: center;">
+                <td><input type="reset" value="Töröl"></td>
+                <td><input type="submit" value="Elküld"></td>
+            </tr>
+        </table>
     </form>
     
-    <button id="extend-db">Extend Database</button>
-    
-    <ul id="plant-list"></ul>
-  </div>
+        <ul id="plant-list"></ul>
+
+      </div>
 
   <div class="container">
     <div class="garden-bed"></div>
   </div>
-
   <script>
-    document.getElementById('extend-db').addEventListener('click', function () {
-        const formData = new URLSearchParams();
-        formData.append('action', 'extend');
-
-        fetch('extend_db.php', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            body: formData
-        })
-        .then(response => response.text())
-        .then(data => alert(data))
-        .catch(error => console.error('Error:', error));
-    });
+      <?php include 'script.js'; ?>
   </script>
+</body>
+</html>
+<?php
+mysqli_close($conn);
+?>
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (isset($_POST['planter_width']) && isset($_POST['planter_length'])) {
+        $width = intval($_POST['planter_width']) ?: 1;
+        $length = intval($_POST['planter_length']) ?: 1;
+        $count = $width * $length;
+    }
+}
+?>
 
 </body>
 </html>
