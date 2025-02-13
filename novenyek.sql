@@ -25,7 +25,7 @@ CREATE TABLE SzeretNemSzeret (
 );
 
 
-INSERT INTO Plants (Nev, LatinNev, Sortavolsag, Totavolsag, FajID) VALUES
+INSERT INTO Faj (Nev, LatinNev, Sortavolsag, Totavolsag, FajID) VALUES
 ('Vörösbab', 'Solanum lycopersicum', 60, 10, 1),
 ('Fehérbab', 'Capsicum annuum', 60, 10, 1),
 ('Jégbab', 'Cucumis sativus', 60, 10, 1),
