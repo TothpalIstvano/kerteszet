@@ -83,3 +83,9 @@ fetch("adatleker.php", {
   .catch(error => {
     console.error('Error:', error);
   });
+
+
+function ult(){
+  const list = document.getElementById('plant-list');
+  Array.list.forEach(item => console.log(item));
+}

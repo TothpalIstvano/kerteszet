@@ -39,10 +39,10 @@ if (!$conn) {
     <label for="plant">Növény kiválasztása:</label>
       <select id="plant" name="plant">
         <?php 
-          $sql = "SELECT name FROM plants";
+          $sql = "SELECT Nev FROM faj";
           $result = mysqli_query($conn, $sql);
           foreach ($result as $row) {
-            echo "<option value='" . $row['name'] . "'>" . $row['name'] . "</option>";
+            echo "<option value='" . $row['Nev'] . "'>" . $row['Nev'] . "</option>";
           }
         ?>
       </select>
@@ -50,11 +50,11 @@ if (!$conn) {
       <label for="quantity">Mennyiség:</label>
       <input id="quantity" name="quantity" placeholder="1" type="number" value="1" min="1">
       <br>
-      <button id="add-plant">Nyövény hozzáadása</button>
+      <button id="add-plant" onclick="ult()">Nyövény hozzáadása</button>
       <button id="extend-db" onclick="extendDB()">Extend Database</button>
       
-    <ul id="plant-list"></ul>
-
+    <ul id="plant-list">
+    </ul>
       </div>
 
   <div class="container">
@@ -67,13 +67,4 @@ if (!$conn) {
 </html>
 <?php
 mysqli_close($conn);
-?>
-<?php
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if (isset($_POST['planter_width']) && isset($_POST['planter_length'])) {
-        $width = intval($_POST['planter_width']) ?: 1;
-        $length = intval($_POST['planter_length']) ?: 1;
-        $count = $width * $length;
-    }
-}
 ?>

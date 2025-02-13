@@ -15,7 +15,7 @@ body {/*https://i.pinimg.com/736x/4a/79/4a/4a794a1d167cc9373a6d1bd2ba7d5f81.jpg 
     .about-container {
       background-color: #eaddcf;
       width: 35vw;
-      margin: auto;
+      margin: auto ;
       padding: 2.5rem;
       border-radius: 10px;
     }
