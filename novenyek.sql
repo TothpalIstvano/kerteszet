@@ -1,15 +1,14 @@
-CREATE TABLE Fajta (
-    ID INT AUTO_INCREMENT PRIMARY KEY,
+CREATE TABLE Faj (
+    FajID INT AUTO_INCREMENT PRIMARY KEY,
     Nev VARCHAR(100) NOT NULL,              -- Növény magyar neve
     LatinNev VARCHAR(100) NOT NULL,         -- Növény latin neve
     Sortavolsag INT,                       -- Sortávolság (cm)
     Totavolsag INT,                        -- Tőtávolság (cm)
-    FajID INT,                           -- Fajta azonosítója
-    FOREIGN KEY (FajtaID) REFERENCES Fajta(FajtaID)
+    FajtaID INT                           -- Fajta azonosítója
 );
 
-CREATE TABLE Faj (
-    FajID INT AUTO_INCREMENT PRIMARY KEY,
+CREATE TABLE Fajta (
+    FajtaID INT AUTO_INCREMENT PRIMARY KEY,
     FajNev VARCHAR(100) NOT NULL,       -- Fajta neve
     Sortavolsag INT,                          -- Sortávolság (cm)
     Totavolsag INT                         -- Tőtávolság (cm)
@@ -20,12 +19,13 @@ CREATE TABLE SzeretNemSzeret (
     ID1 INT NOT NULL,                   -- Első növény azonosítója
     ID2 INT NOT NULL,                   -- Második növény azonosítója
     Kapcsolat ENUM('Szeret', 'Nemszeret'),  -- Kapcsolat típusa (szeret/nem szeret)
-    FOREIGN KEY (ID1) REFERENCES Fajta(ID),
-    FOREIGN KEY (ID2) REFERENCES Fajta(ID)
+    FOREIGN KEY (ID1) REFERENCES Fajta(FajtaID),
+    FOREIGN KEY (ID2) REFERENCES Fajta(FajtaID)
 );
 
+alter table Faj add foreign key (FajtaID) references Faj(FajId);
 
-INSERT INTO Plants (Nev, LatinNev, Sortavolsag, Totavolsag, FajID) VALUES
+INSERT INTO Faj (Nev, LatinNev, Sortavolsag, Totavolsag, FajtaID) VALUES
 ('Vörösbab', 'Solanum lycopersicum', 60, 10, 1),
 ('Fehérbab', 'Capsicum annuum', 60, 10, 1),
 ('Jégbab', 'Cucumis sativus', 60, 10, 1),
@@ -48,15 +48,15 @@ INSERT INTO Plants (Nev, LatinNev, Sortavolsag, Totavolsag, FajID) VALUES
 ('Hagyományos cékla', 'Cucumis sativus', 40, 15, 9);
 
 INSERT INTO Fajta (FajNev, Sortavolsag, Totavolsag) VALUES
-('Bab', 60, 10),  --1
-('Uborka', 100, 20), --2
-('Levendula', 150, 50), --3
-('Burgonya', 70, 30), --4
-('Káposzta', 30, 25), --5
-('Paradicsom', 30, 50), --6
-('Saláta', 25, 20), --7
-('Tök', 150, 150), --8
-('Cékla', 40, 15); --9
+('Bab', 60, 10),
+('Uborka', 100, 20),
+('Levendula', 150, 50),
+('Burgonya', 70, 30),
+('Káposzta', 30, 25),
+('Paradicsom', 30, 50),
+('Saláta', 25, 20),
+('Tök', 150, 150),
+('Cékla', 40, 15);
 
 INSERT INTO SzeretNemSzeret (ID1, ID2, Kapcsolat) VALUES
 (1, 4, 'Szeret'),
