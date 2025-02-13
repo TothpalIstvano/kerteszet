@@ -58,7 +58,7 @@ INSERT INTO Fajta (FajNev, Sortavolsag, Totavolsag) VALUES
 ('Tök', 150, 150), --8
 ('Cékla', 40, 15); --9
 
-INSERT INTO CompanionPlants (ID1, ID2, Kapcsolat) VALUES
+INSERT INTO SzeretNemSzeret (ID1, ID2, Kapcsolat) VALUES
 (1, 4, 'Szeret'),
 (1, 5, 'Szeret'),
 (1, 7, 'Szeret'),
