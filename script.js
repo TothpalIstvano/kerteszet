@@ -32,18 +32,19 @@ function setPlanterSize() {
     gardenPlanter.innerHTML = ""; // Clear existing items
 
     for (let i = 0; i < planterSize; i++) {
-        let planterRow = document.createElement("div");
-        div.classList.add("garden-item");
-        for (let j = 0; j < planterWidth; j++) {
-            div.classList.add("garden-item");
-            div.textContent = i + 1;
-            gardenPlanter.appendChild(div);
-        }
-        planter.appendChild(planterRow);
-    }
+      let planterRow = document.createElement("div");
+      planterRow.classList.add("garden-row");
+  
+      for (let j = 0; j < planterWidth; j++) {
+          let cell = document.createElement("div");
+          cell.classList.add("garden-item");
+          cell.textContent = i * planterWidth + j + 1;
+          planterRow.appendChild(cell);
+      }
+      gardenPlanter.appendChild(planterRow);
+  }
+  
 }
-
-
 
 document.getElementById('add-plant').addEventListener('click', () => {
   const plant = document.getElementById('plant').value;
@@ -59,34 +60,26 @@ document.getElementById('add-plant').addEventListener('click', () => {
   document.getElementById('plant-list').appendChild(li);
 });
 
-function extendDB() {
-  const width = document.getElementById('planter-width').value;
-  const length = document.getElementById('planter-length').value;
-  const plant = document.getElementById('plant').value;
-  const quantity = document.getElementById('quantity').value;
-
-  const formData = new URLSearchParams();
-  formData.append('planter_width', width);
-  formData.append('planter_length', length);
-  formData.append('plant', plant);
-  formData.append('quantity', quantity);
-  formData.append('action', 'extend');
-
-  fetch('extend_db.php', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: formData
+fetch("adatleker.php", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({
+    plant: document.getElementById('plant').value,
+    quantity: document.getElementById('quantity').value
   })
-  .then(response => response.text())
-  .then(data => alert(data))
-  .catch(error => console.error('Error:', error));
-}
-
-document.getElementById('extend-db').addEventListener('click', extendDB);
-
-function feltolt() {
-  fetch('feltolt.php')
-  .then(response => response.text())
-  .then(data => alert(data))
-  .catch(error => console.error('Error:', error));
-}
+})
+  .then(response => response.json())
+  .then(data => {
+    if (data.success) {
+      const li = document.createElement('li');
+      li.textContent = `${data.quantity} x ${data.plant}`;
+      document.getElementById('plant-list').appendChild(li);
+    } else {
+      alert(data.message);
+    }
+  })
+  .catch(error => {
+    console.error('Error:', error);
+  });
