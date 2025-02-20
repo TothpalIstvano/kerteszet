@@ -5,7 +5,7 @@
 
 body {/*https://i.pinimg.com/736x/4a/79/4a/4a794a1d167cc9373a6d1bd2ba7d5f81.jpg   --> béka*/
     background-color: #eaddcf;
-    background:  url("https://files.oaiusercontent.com/file-7S6FzS1V49TFeB9nfakQu8?se=2025-02-06T10%3A57%3A22Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D604800%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3Da28b4420-919a-4d58-8da0-427b911a48d9.webp&sig=4sqlxn7yb7alVe0oNgtQPWlQeMyrcFrm6HPJZWpaD1A%3D");
+    background:  url("https://i.pinimg.com/736x/4a/79/4a/4a794a1d167cc9373a6d1bd2ba7d5f81.jpg");
       display: flex;
       justify-content: space-around;
       align-items: baseline-start;
