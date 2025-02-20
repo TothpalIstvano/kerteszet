@@ -38,10 +38,12 @@
         $sortav = @$_POST['sortav'];
         $totav = @$_POST['totav'];
         $fajta = @$_POST['fajta'];
+        
+
         // a fajtaID az legyen, ami most megadott fajta = egy már adatbázisban lévő fajtával, else az utolsó hozzáadott fajtával
 
-        $sql = "INSERT INTO Faj VALUES(FajId, '$novNev', '$novLatin', $sortav, $totav, FajtaID);";
-
+        $sql = "INSERT INTO Faj (Nev, Latin_nev, Sortavolsag, Totavolsag, FajtaID)VALUES ('$novNev', '$novLatin', $sortav, $totav, $fajta);";
+        echo "DEBUG: " . $sql;
         if ($conn->query($sql)) {
             echo "Az adatfelvétel sikeres";
         } else {

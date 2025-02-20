@@ -1,17 +1,4 @@
-<?php
-$server = "localhost";
-$user = "root";
-$pass = "mysql";
-$dbase = "kert";
-
-mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
-
-$conn = mysqli_connect($server, $user, $pass, $dbase);
-
-if (!$conn) {
-    exit("Connection failed: " . mysqli_connect_error());
-}
-?>
+<?php include 'connect.php'; ?>
 <!DOCTYPE html>
 <html lang="hu">
 <head>
