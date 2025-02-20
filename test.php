@@ -91,7 +91,8 @@ mysqli_close($conn);*/
       <input id="quantity" name="quantity" placeholder="1" type="number" value="1" min="1">
       <br>
       <button id="add-plant">Nyövény hozzáadása</button>
-      <button id="extend-db" onclick="extendDB()">Extend Database</button>
+      <!--
+      <button id="extend-db" onclick="extendDB()">Extend Database</button>-->
 
     <form method="POST" action="addproba.php">
         <table>
