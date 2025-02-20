@@ -1,16 +1,4 @@
-
-<?php
-$server = "localhost";
-$user = "root";
-$pass = "mysql";
-$dbase = "kert4";
-
-mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
-$conn = mysqli_connect($server, $user, $pass, $dbase);
-
-if (!$conn) {
-    exit("Connection failed: " . mysqli_connect_error());
-}
+<?php include 'connect.php'; 
 
 // Új növény hozzáadása az adatbázishoz
 /*if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -123,11 +111,13 @@ mysqli_close($conn);*/
             </tr>
         </table>
     </form>
+        <ul id="plant-list">
+        <!-- Hozzá adott növények -->
+        </ul>
+
+        <button id="create-bed" onclick="megcsinál()" type="button">Elkészít</button> <!-- Elküldi a scriptnek a kelő adatokat azaz hogy miből mennyi van -->
+    </div>
     
-        <ul id="plant-list"></ul>
-
-      </div>
-
   <div class="container">
     <div class="garden-bed"></div>
   </div>

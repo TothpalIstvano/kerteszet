@@ -1,7 +1,7 @@
 <?php
 // Adatbázis kapcsolat
 $host = 'localhost'; // Az adatbázis szerver
-$db = 'kert';     // Az adatbázis neve
+$db = 'kert4';     // Az adatbázis neve
 $user = 'root';      // Az adatbázis felhasználó
 $pass = 'mysql';          // Az adatbázis jelszava
 

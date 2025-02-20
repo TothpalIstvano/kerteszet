@@ -85,7 +85,24 @@ fetch("adatleker.php", {
   });
 
 
-function ult(){
-  const list = document.getElementById('plant-list');
-  Array.list.forEach(item => console.log(item));
+function megcsinál(){
+  const list2 = document.getElementById('plant-list');
+  Array.from(list2.children).forEach(item => {
+    const text = item.textContent;
+    console.log(text);
+  });
+  const hossza = document.getElementById('planter-length').value;
+  const szelesseg = document.getElementById('planter-width').value;
+  for (let i = 0; i < hossza; i++) {
+    for (let j = 0; j < szelesseg; j++) {
+
+    }
+  }
 }
+/*
+plant-list --> db, név kiszed
+fetch --> post-olás adat lekerés php-nak
+    .then --> bejövő adat vissza transformálása
+    .then --> elsőnek azt amelyik a legkevesebbet szereti vagy a legkisebb sortővű növény kiválasztása
+    .then --> szeret nem szeret tábla alapján kiválasztás --> ha többet is szeret és nem szélen van akkor azt amelyik 2 vagy többet szeret --> ha mindkettő akkor rnd
+*/
