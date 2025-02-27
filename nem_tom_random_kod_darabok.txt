@@ -1,0 +1,14 @@
+function megcsinál(){
+  const list2 = document.getElementById('plant-list');
+  Array.from(list2.children).forEach(item => {
+    const text = item.textContent;
+    console.log(text);
+  });
+  const hossza = document.getElementById('planter-length').value;
+  const szelesseg = document.getElementById('planter-width').value;
+  for (let i = 0; i < hossza; i++) {
+    for (let j = 0; j < szelesseg; j++) {
+
+    }
+  }
+}

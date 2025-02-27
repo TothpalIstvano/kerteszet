@@ -8,9 +8,6 @@
   <style>
     <?php include 'style.css'; ?>
   </style>  
-  <script>
-      <?php include 'script.js'; ?>
-  </script>
   <title>Garden Planner</title>
 </head>
 <body>
@@ -41,22 +38,27 @@
       <input id="quantity" name="quantity" placeholder="1" type="number" value="1" min="1">
       <br>
       <div id="gombs">
-        <button id="add-plant" onclick="ult()">Nyövény hozzáadása</button>
+        <button id="add-plant">Nyövény hozzáadása</button>
         <button id="extend-db" onclick="adatFelForm()">Extend Database</button>
       </div>
-      
+      <div id="kertKuldGomb"><button id="gen" onclick="kertkeszito()">Kert elkészitése</button></div>
       <div id="addfel">
 
       </div>
       
     <ul id="plant-list">
+          
     </ul>
-      </div>
-
+    
+  </div>
+    
+   
   <div class="container">
     <div class="garden-bed"></div>
   </div>
-
+  <script>
+      <?php include 'script.js'; ?>
+  </script>
 </body>
 </html>
 <?php

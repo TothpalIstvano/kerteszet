@@ -16,7 +16,7 @@ body {/*https://i.pinimg.com/736x/4a/79/4a/4a794a1d167cc9373a6d1bd2ba7d5f81.jpg 
       background-color: #eaddcf;
       width: 35vw;
       margin: auto ;
-      padding: 2.5rem;
+      padding: 2rem;
       border-radius: 10px;
     }
     
@@ -29,8 +29,8 @@ body {/*https://i.pinimg.com/736x/4a/79/4a/4a794a1d167cc9373a6d1bd2ba7d5f81.jpg 
     .garden-bed {
       border: solid 10px #55423d;
       display: grid;
-      grid-template-rows: repeat(var(--length), 1fr);
-      grid-template-columns: repeat(var(--width), 1fr);
+      grid-template-rows: repeat(var(--length), 0.6fr);
+      grid-template-columns: repeat(var(--width), 0.6fr);
     }
     
     .garden-item {
@@ -42,8 +42,8 @@ body {/*https://i.pinimg.com/736x/4a/79/4a/4a794a1d167cc9373a6d1bd2ba7d5f81.jpg 
         align-items: center;
         -ms-flex-pack: center;
         justify-content: center;
-        min-height: 1rem;
-        padding: .75rem;
+        min-height: 10px;
+        padding: 16px;
         background-color: #8c7851;
     }
 
