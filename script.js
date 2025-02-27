@@ -47,8 +47,8 @@ function setPlanterSize() {
 }
 
 document.getElementById('add-plant').addEventListener('click', () => {
-  const plant = document.getElementById('plant').value;
-  const quantity = document.getElementById('quantity').value;
+  const plant = document.getElementById('plant').value  ||  "";
+  const quantity = document.getElementById('quantity').value ||  0;
   const li = document.createElement('li');
   li.textContent = `${quantity} x ${plant}`;
 
@@ -83,22 +83,6 @@ fetch("adatleker.php", {
   .catch(error => {
     console.error('Error:', error);
   });
-
-
-function megcsinál(){
-  const list2 = document.getElementById('plant-list');
-  Array.from(list2.children).forEach(item => {
-    const text = item.textContent;
-    console.log(text);
-  });
-  const hossza = document.getElementById('planter-length').value;
-  const szelesseg = document.getElementById('planter-width').value;
-  for (let i = 0; i < hossza; i++) {
-    for (let j = 0; j < szelesseg; j++) {
-
-    }
-  }
-}
 
 function adatFelForm(){
   const hely = document.getElementById('addfel');
@@ -198,8 +182,16 @@ function adatFelForm(){
     gomb.addEventListener('click', () => {
       adatFelForm();
     });
+    
+    const gombs2 = document.getElementById("kertKuldGomb");
+    const gomb2 = document.createElement("button");
+    gomb2.id = "gen";
+    gomb2.textContent = "Kert elkészitése";
+    gomb2.addEventListener('click', () => {
+      kertkeszito();
+    });
+    gombs2.appendChild(gomb2);
     gombs.appendChild(gomb);
-    document.getElementById('gen').disabled = false;
   });
 
   td62.appendChild(input7);
@@ -212,7 +204,40 @@ function adatFelForm(){
   hely.appendChild(form);
 
   document.getElementById('extend-db').remove();
-  document.getElementById('gen').disabled = true;
+  document.getElementById('gen').remove();
+}
+
+async function kertkeszito(){
+  const szeleseg = document.getElementById("planter-width").value || 1;
+  const hosszusag = document.getElementById("planter-length").value || 1;
+  let kertMatrix = new Array(szeleseg);
+
+  for (let i = 0; i < szeleseg; i++) {
+    kertMatrix[i] = new Array(hosszusag);
+      for (let j = 0; j < hosszusag; j++) {
+        kertMatrix[i][j] = true; // Fill with some values
+      }
+  }
+  console.log(kertMatrix);
+  // post-olás adat lekerés php-nak
+  fetch("adatleker.php", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({})
+  })
+    // bejövő adat vissza transformálása
+    .then(response => response.json())
+    .then(data => { console.log(data)})
+    .catch(error => {
+      console.error('Error:', error);
+    });
+
+
+  // Display the dynamic 2D array
+
+
 }
 /*
 plant-list --> db, név kiszed

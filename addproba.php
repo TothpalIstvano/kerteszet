@@ -44,18 +44,16 @@
 
         $sql = "INSERT INTO Fajta VALUES(FajtaId, '$fajta', $sortav, $totav);";
 
-        // a fajtaID az legyen, ami most megadott fajta = egy már adatbázisban lévő fajtával, else az utolsó hozzáadott fajtával
-
-        $sql = "INSERT INTO Faj (Nev, LatinNev, Sortavolsag, Totavolsag) VALUES ('$novNev', '$novLatin', $sortav, $totav);";
-
         if ($conn->query($sql)) {
             echo "Az adatfelvétel sikeres";
         } else {
             echo "Sikertelen adatfelvétel";
         }
-        
-        
 
+        // a fajtaID az legyen, ami most megadott fajta = egy már adatbázisban lévő fajtával, else az utolsó hozzáadott fajtával
+
+        $sql = "INSERT INTO Faj (Nev, LatinNev, Sortavolsag, Totavolsag)VALUES ('$novNev', '$novLatin', $sortav, $totav);";
+        echo "DEBUG: " . $sql;
         if ($conn->query($sql)) {
             echo "Az adatfelvétel sikeres";
         } else {
@@ -64,6 +62,9 @@
         
         $szam = "SELECT Fajta.FajtaId FROM Fajta, Faj where Faj.Sortavolsag = Fajta.Sortavolsag";
         $sql = "INSERT INTO Faj (FajtaID) VALUES ($szam);";
+        
+        $sql = "SELECT * FROM Faj";
+        $result = $conn->query($sql);
 
         /*echo"<table>";
         echo"<tr>
