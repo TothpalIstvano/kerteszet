@@ -39,30 +39,31 @@
         $totav = @$_POST['totav'];
         $fajta = @$_POST['fajta'];
         
-
-        // a fajtaID az legyen, ami most megadott fajta = egy már adatbázisban lévő fajtával, else az utolsó hozzáadott fajtával
-
-        $sql = "INSERT INTO Faj (Nev, Latin_nev, Sortavolsag, Totavolsag, FajtaID)VALUES ('$novNev', '$novLatin', $sortav, $totav, $fajta);";
-        echo "DEBUG: " . $sql;
-        if ($conn->query($sql)) {
-            echo "Az adatfelvétel sikeres";
-        } else {
-            echo "Sikertelen adatfelvétel";
-        }
-        
         $sql = "SELECT * FROM Fajta";
         $result = $conn->query($sql);  //resultba kerülnek az adatbázis sorai
 
         $sql = "INSERT INTO Fajta VALUES(FajtaId, '$fajta', $sortav, $totav);";
 
+        // a fajtaID az legyen, ami most megadott fajta = egy már adatbázisban lévő fajtával, else az utolsó hozzáadott fajtával
+
+        $sql = "INSERT INTO Faj (Nev, LatinNev, Sortavolsag, Totavolsag) VALUES ('$novNev', '$novLatin', $sortav, $totav);";
+
         if ($conn->query($sql)) {
             echo "Az adatfelvétel sikeres";
         } else {
             echo "Sikertelen adatfelvétel";
         }
         
-        $sql = "SELECT * FROM Faj";
-        $result = $conn->query($sql);
+        
+
+        if ($conn->query($sql)) {
+            echo "Az adatfelvétel sikeres";
+        } else {
+            echo "Sikertelen adatfelvétel";
+        }
+        
+        $szam = "SELECT Fajta.FajtaId FROM Fajta, Faj where Faj.Sortavolsag = Fajta.Sortavolsag";
+        $sql = "INSERT INTO Faj (FajtaID) VALUES ($szam);";
 
         /*echo"<table>";
         echo"<tr>
