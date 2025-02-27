@@ -99,6 +99,121 @@ function megcsinál(){
     }
   }
 }
+
+function adatFelForm(){
+  const hely = document.getElementById('addfel');
+  const form = document.createElement('form');
+  form.method = "POST";
+  form.action = "addproba.php";
+  const table = document.createElement('table');
+  const rows = [];
+  const tr1 = document.createElement('tr');
+  const td11 = document.createElement('td');
+  td11.textContent = "Növény neve: ";
+  const td12 = document.createElement('td');
+  const input1 = document.createElement('input');
+  input1.type = "text";
+  input1.name = "novNev";
+  input1.id = "novNev";
+  input1.maxLength = "50";
+  td12.appendChild(input1);
+  tr1.appendChild(td11);
+  tr1.appendChild(td12);
+  rows.push(tr1);
+
+  const tr2 = document.createElement('tr');
+  const td21 = document.createElement('td');
+  td21.textContent = "Növény latin neve: ";
+  const td22 = document.createElement('td');
+  const input2 = document.createElement('input');
+  input2.type = "text";
+  input2.name = "novLatin";
+  input2.id = "novLatin";
+  td22.appendChild(input2);
+  tr2.appendChild(td21);
+  tr2.appendChild(td22);
+  rows.push(tr2);
+
+  const tr3 = document.createElement('tr');
+  const td31 = document.createElement('td');
+  td31.textContent = "Növény sortávolsága: ";
+  const td32 = document.createElement('td');
+  const input3 = document.createElement('input');
+  input3.type = "number";
+  input3.name = "sortav";
+  input3.id = "sortav";
+  td32.appendChild(input3);
+  tr3.appendChild(td31);
+  tr3.appendChild(td32);
+  rows.push(tr3);
+
+  const tr4 = document.createElement('tr');
+  const td41 = document.createElement('td');
+  td41.textContent = "Növény tőtávolsága: ";
+  const td42 = document.createElement('td');
+  const input4 = document.createElement('input');
+  input4.type = "number";
+  input4.name = "totav";
+  input4.id = "totav";
+  td42.appendChild(input4);
+  tr4.appendChild(td41);
+  tr4.appendChild(td42);
+  rows.push(tr4);
+
+  const tr5 = document.createElement('tr');
+  const td51 = document.createElement('td');
+  td51.textContent = "Fajta: ";
+  const td52 = document.createElement('td');
+  const input5 = document.createElement('input');
+  input5.type = "text";
+  input5.name = "fajta";
+  input5.id = "fajta";
+  td52.appendChild(input5);
+  tr5.appendChild(td51);
+  tr5.appendChild(td52);
+  rows.push(tr5);
+
+  const tr6 = document.createElement('tr');
+  const td61 = document.createElement('td');
+  td61.style.textAlign = "center";
+  const input6 = document.createElement('input');
+  input6.type = "reset";
+  input6.value = "Töröl";
+  td61.appendChild(input6);
+  const td62 = document.createElement('td');
+  td62.style.textAlign = "center";
+  const input7 = document.createElement('input');
+  input7.type = "submit";
+  input7.value = "Elküld";
+
+  input7.addEventListener('click', () => {
+    const addfel = document.getElementById("addfel");
+    while (addfel.firstChild) {
+        addfel.removeChild(addfel.firstChild);
+    };
+    const gombs = document.getElementById("gombs");
+    const gomb = document.createElement("button");
+    gomb.id = "extend-db";
+    gomb.textContent = "Extend Database";
+    gomb.addEventListener('click', () => {
+      adatFelForm();
+    });
+    gombs.appendChild(gomb);
+    document.getElementById('gen').disabled = false;
+  });
+
+  td62.appendChild(input7);
+  tr6.appendChild(td61);
+  tr6.appendChild(td62);
+  rows.push(tr6);
+
+  rows.forEach(row => table.appendChild(row));
+  form.appendChild(table);
+  hely.appendChild(form);
+
+  document.getElementById('extend-db').remove();
+  document.getElementById('gen').disabled = true;
+}
 /*
 plant-list --> db, név kiszed
 fetch --> post-olás adat lekerés php-nak

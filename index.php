@@ -7,7 +7,10 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <style>
     <?php include 'style.css'; ?>
-  </style>
+  </style>  
+  <script>
+      <?php include 'script.js'; ?>
+  </script>
   <title>Garden Planner</title>
 </head>
 <body>
@@ -37,9 +40,14 @@
       <label for="quantity">Mennyiség:</label>
       <input id="quantity" name="quantity" placeholder="1" type="number" value="1" min="1">
       <br>
-      <button id="add-plant" onclick="ult()">Nyövény hozzáadása</button>
-      <button id="extend-db" onclick="extendDB()">Extend Database</button>
+      <div id="gombs">
+        <button id="add-plant" onclick="ult()">Nyövény hozzáadása</button>
+        <button id="extend-db" onclick="adatFelForm()">Extend Database</button>
+      </div>
+      
+      <div id="addfel">
 
+      </div>
       
     <ul id="plant-list">
     </ul>
@@ -48,9 +56,7 @@
   <div class="container">
     <div class="garden-bed"></div>
   </div>
-  <script>
-      <?php include 'script.js'; ?>
-  </script>
+
 </body>
 </html>
 <?php
