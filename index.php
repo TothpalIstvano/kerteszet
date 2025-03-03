@@ -54,6 +54,7 @@
     
    
   <div class="container">
+    <div id="kert"></div>
     <div class="garden-bed"></div>
   </div>
   <script>

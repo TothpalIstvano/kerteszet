@@ -1,18 +1,21 @@
+
 const planterInputs = document.querySelectorAll(".about-container input");
 
 function handleUpdate() {
   const width = document.getElementById("planter-width").value || 1;
   const length = document.getElementById("planter-length").value || 1;
-
+  
   document.documentElement.style.setProperty(`--width`, width);
   document.documentElement.style.setProperty(`--length`, length);
 
   generateGardenItems(width * length);
 }
 
+//#region garden
 function generateGardenItems(count) {
   const gardenPlanter = document.querySelector(".garden-bed");
   gardenPlanter.innerHTML = ""; // Clear existing items
+
 
   for (let i = 0; i < count; i++) {
     let div = document.createElement("div");
@@ -21,7 +24,6 @@ function generateGardenItems(count) {
     gardenPlanter.appendChild(div);
   }
 }
-
 planterInputs.forEach((input) => input.addEventListener("input", handleUpdate));
 window.onload = handleUpdate; // Initialize on page load
 
@@ -45,45 +47,41 @@ function setPlanterSize() {
   }
   
 }
+//#endregion
 
+//#region lista
 document.getElementById('add-plant').addEventListener('click', () => {
-  const plant = document.getElementById('plant').value  ||  "";
+  const plant = document.getElementById('plant').value.trim()  ||  "";
   const quantity = document.getElementById('quantity').value ||  0;
-  const li = document.createElement('li');
-  li.textContent = `${quantity} x ${plant}`;
-
-  const deleteBtn = document.createElement('button');
-  deleteBtn.textContent = 'Delete';
-  deleteBtn.onclick = () => li.remove();
-  li.appendChild(deleteBtn);
-
-  document.getElementById('plant-list').appendChild(li);
-});
-
-fetch("adatleker.php", {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json"
-  },
-  body: JSON.stringify({
-    plant: document.getElementById('plant').value,
-    quantity: document.getElementById('quantity').value
-  })
-})
-  .then(response => response.json())
-  .then(data => {
-    if (data.success) {
-      const li = document.createElement('li');
-      li.textContent = `${data.quantity} x ${data.plant}`;
-      document.getElementById('plant-list').appendChild(li);
-    } else {
-      alert(data.message);
+  const list = document.getElementById('plant-list');
+  let van = false;
+  Array.from(list.children).forEach(child => {
+    if (child.textContent.includes(plant)) {
+      const currentQuantity = parseInt(child.textContent.split(' x ')[0]);
+      child.textContent = `${currentQuantity + parseInt(quantity)} x ${plant}`;
+      const deleteBtn = document.createElement('button');
+      deleteBtn.textContent = 'Delete';
+      deleteBtn.onclick = () => child.remove();
+      child.appendChild(deleteBtn);
+      van = true;
+      
     }
-  })
-  .catch(error => {
-    console.error('Error:', error);
   });
+  if (!van) {
+    const li = document.createElement('li');
+    li.textContent = `${quantity} x ${plant}`;
+    const deleteBtn = document.createElement('button');
+    deleteBtn.textContent = 'Delete';
+    deleteBtn.onclick = () => li.remove();
+    li.appendChild(deleteBtn);
+  
+    document.getElementById('plant-list').appendChild(li);
+  }
+  
+});
+//#endregion
 
+//#region form
 function adatFelForm(){
   const hely = document.getElementById('addfel');
   const form = document.createElement('form');
@@ -170,6 +168,7 @@ function adatFelForm(){
   input7.type = "submit";
   input7.value = "Elküld";
 
+
   input7.addEventListener('click', () => {
     const addfel = document.getElementById("addfel");
     while (addfel.firstChild) {
@@ -206,12 +205,17 @@ function adatFelForm(){
   document.getElementById('extend-db').remove();
   document.getElementById('gen').remove();
 }
+//#endregion
 
+//#region Kertet elkészitő függvény
 async function kertkeszito(){
   const szeleseg = document.getElementById("planter-width").value || 1;
   const hosszusag = document.getElementById("planter-length").value || 1;
   let kertMatrix = new Array(szeleseg);
+  let novenyListaHossz = document.getElementById("plant-list").children.length
+  let novenyMatrix = new Array(novenyListaHossz);
 
+//#region kert matrix inicializálása
   for (let i = 0; i < szeleseg; i++) {
     kertMatrix[i] = new Array(hosszusag);
       for (let j = 0; j < hosszusag; j++) {
@@ -219,26 +223,99 @@ async function kertkeszito(){
       }
   }
   console.log(kertMatrix);
-  // post-olás adat lekerés php-nak
-  fetch("adatleker.php", {
+//#endregion
+
+//#region noveny matrix létrehozássa
+  for (let i = 0; i < novenyListaHossz; i++) {
+    novenyMatrix[i] = new Array(7);
+      for (let j = 0; j < 7; j++) {
+        novenyMatrix[i][j] = j;  // 0. nev
+                                 // 1. mennyiseg
+                                 // 2. sortavolsag
+                                 // 3. totavolsag
+                                 // 4. fajta
+                                 // 5. szeret --> lista
+                                 // 6. nem szeret --> lista
+        if(j == 5 || j == 6){
+          novenyMatrix[i][j] = [];
+        }
+      }
+  }
+  console.log(novenyMatrix);
+//#endregion
+
+//#region noveny matrix beolvasas
+  for (let i = 0; i < document.getElementById("plant-list").children.length; i++) {
+      novenyMatrix[i][0] = document.getElementById("plant-list").children[i].textContent.replace("Delete", " ").trim().split(" x ")[1].trim()
+      novenyMatrix[i][1] = parseInt(document.getElementById("plant-list").children[i].textContent.replace("Delete", " ").trim().split(" x ")[0].trim());
+      const adat = await adatlekeres(novenyMatrix[i][0]);
+      console.log(adat);
+      novenyMatrix[i][2] = adat.plant.Sortavolsag;
+      novenyMatrix[i][3] = adat.plant.Totavolsag;
+      novenyMatrix[i][4] = adat.plant.Fajta;
+      novenyMatrix[i][5] = adat.likes;
+      novenyMatrix[i][6] = adat.dislikes;
+  }
+  console.log(novenyMatrix);
+//#endregion
+
+//#region kert átépités
+    const gardenPlanter = document.querySelector(".garden-bed");
+    gardenPlanter.innerHTML = ""; // Clear existing items
+    gardenPlanter.style = "border: #ffffff00;";
+    const kert = document.getElementById("kert");
+    let table = kert.querySelector("table");
+    if (!table) {
+      table = document.createElement("table");
+      kert.appendChild(table);
+    }
+    let tbody = table.querySelector("tbody");
+    if (!tbody) {
+      tbody = document.createElement("tbody");
+      table.appendChild(tbody);
+    } else {
+      tbody.innerHTML = ""; // Clear existing rows
+    }
+    for (let i = 0; i < hosszusag; i++) {
+      const row = document.createElement("tr");
+      for (let j = 0; j < szeleseg; j++) {
+        const cell = document.createElement("td");
+        cell.textContent = `${i},${j}`;
+        row.appendChild(cell);
+      }
+      tbody.appendChild(row);
+    }
+//#endregion
+
+  for (let i = 0; i < novenyListaHossz; i++) {
+    for (let j = 0; j < novenyMatrix[i][1]; j++) {
+    
+    }
+  } 
+}
+//#endregion
+
+
+//#region adat lekérése a php-ból
+async function adatlekeres(kereset){
+  return fetch("adatleker.php", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
     },
-    body: JSON.stringify({})
+    body: JSON.stringify({plant: kereset})
   })
     // bejövő adat vissza transformálása
     .then(response => response.json())
-    .then(data => { console.log(data)})
+    .then(data => { return data })
     .catch(error => {
       console.error('Error:', error);
+      return null;
     });
-
-
-  // Display the dynamic 2D array
-
-
 }
+//#endregion
+
+//#region leírás
 /*
 plant-list --> db, név kiszed
 fetch --> post-olás adat lekerés php-nak
@@ -246,3 +323,32 @@ fetch --> post-olás adat lekerés php-nak
     .then --> elsőnek azt amelyik a legkevesebbet szereti vagy a legkisebb sortővű növény kiválasztása
     .then --> szeret nem szeret tábla alapján kiválasztás --> ha többet is szeret és nem szélen van akkor azt amelyik 2 vagy többet szeret --> ha mindkettő akkor rnd
 */
+//#endregion
+
+//#region feles kodok
+/*
+
+kert.querySelector("table").querySelector("tbody").querySelectorAll("tr")[0].querySelectorAll("td")[2].style="background-color: rgb(255, 0, 0);";
+
+
+
+
+
+  gardenPlanter.style="border: solid 10px #55423d;";
+  const kert = document.getElementById("kert");
+  while (kert.firstChild) {
+    kert.removeChild(kert.firstChild);
+  }
+
+const plantSelect = document.getElementById("plant");
+  const options = plantSelect.options;
+  const adatok = [];
+  for (let i = 0; i < options.length; i++) {
+    const adat = await adatlekeres(options[i].value);
+    adatok.push(adat);
+    console.log(adat.plants[0].Nev);
+  }
+  console.log(adatok);
+
+*/
+//#endregion
