@@ -53,9 +53,6 @@ mysqli_close($conn);*/
 
   <div class="about-container">
     <h1>Garden Planner</h1>
-    <p>This is a simple garden planner proof of concept...</p>
-    <h2>Let's Set Up Your Bed!</h2>
-    <p>What we do is take the width (👈 to 👉) and length (👆 to 👇)...</p>
     
     
       <label for="width">How many feet wide is your planter?</label>
@@ -104,7 +101,30 @@ mysqli_close($conn);*/
                 <td>Fajta: </td>
                 <td><input type="text" name="fajta" id="fajta"></td>
             </tr>
-            <!-- kéne még: fajta id auto increment +1, hogy hozzáadásnál az is fel legyen véve az adatbázisba-->
+            <tr>
+              <td>Mi mellett szeret lenni:</td>
+              <td><select id="szeretMellette" name="szeretMellette">
+                <?php 
+                  $sql = "SELECT FajtaId, FajNev FROM Fajta";
+                  $result = mysqli_query($conn, $sql);
+                  foreach ($result as $row) {
+                    echo "<option value='" . $row['FajtaId'] . "'>" . $row['FajNev'] . "</option>";
+                  }
+                ?>
+              </select></td>
+            </tr>
+            <tr>
+              <td>Mi mellett NEM szeret lenni:</td>
+              <td><select id="nemMellette" name="nemMellette">
+                <?php 
+                  $sql = "SELECT FajtaId, FajNev FROM Fajta";
+                  $result = mysqli_query($conn, $sql);
+                  foreach ($result as $row) {
+                    echo "<option value='" . $row['FajtaId'] . "'>" . $row['FajNev'] . "</option>";
+                  }
+                ?>
+              </select></td>
+            </tr>
             <tr style = "text-align: center;">
                 <td><input type="reset" value="Töröl"></td>
                 <td><input type="submit" value="Elküld"></td>
@@ -119,7 +139,7 @@ mysqli_close($conn);*/
     </div>
     
   <div class="container">
-    <div class="garden-bed"></div>
+    <!--<div class="garden-bed"></div>-->
   </div>
   <script>
       <?php include 'script.js'; ?>
