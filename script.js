@@ -170,6 +170,9 @@ function adatFelForm(){
 
 
   input7.addEventListener('click', () => {
+    setTimeout(() => {
+      
+   
     const addfel = document.getElementById("addfel");
     while (addfel.firstChild) {
         addfel.removeChild(addfel.firstChild);
@@ -191,7 +194,8 @@ function adatFelForm(){
     });
     gombs2.appendChild(gomb2);
     gombs.appendChild(gomb);
-  });
+  }); 
+  },500);
 
   td62.appendChild(input7);
   tr6.appendChild(td61);
