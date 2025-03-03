@@ -16,10 +16,10 @@
         </style>
 </head>
 <body>
-      
+    
 <?php
         include "connect.php";
-        $sql = "CREATE TABLE IF NOT EXISTS Faj (FajId INT AUTO_INCREMENT PRIMARY KEY, Nev VARCHAR(100) NOT NULL, LatinNev VARCHAR(100) NOT NULL, Sortavolsag INT, Totavolsag INT, FajtaID INT);";
+        /*$sql = "CREATE TABLE IF NOT EXISTS Faj (FajId INT AUTO_INCREMENT PRIMARY KEY, Nev VARCHAR(100) NOT NULL, LatinNev VARCHAR(100) NOT NULL, Sortavolsag INT, Totavolsag INT, FajtaID INT);";
         if (mysqli_query($conn, $sql)) {
             echo "A tábla létrehozása sikeres" .'<br>';
         } else {
@@ -84,6 +84,89 @@
                 }
         }
         echo"</table>";*/
+
+
+// Create tables if they don't exist
+$sql = "CREATE TABLE IF NOT EXISTS Faj (FajId INT AUTO_INCREMENT PRIMARY KEY, Nev VARCHAR(100) NOT NULL, LatinNev VARCHAR(100) NOT NULL, Sortavolsag INT, Totavolsag INT, FajtaID INT);";
+if (mysqli_query($conn, $sql)) {
+    echo "A tábla létrehozása sikeres" .'<br>';
+} else {
+    echo "Sikertelen SQL";
+}
+
+$sql = "CREATE TABLE IF NOT EXISTS Fajta (FajtaId INT AUTO_INCREMENT PRIMARY KEY, FajNev VARCHAR(100) NOT NULL, Sortavolsag INT, Totavolsag INT);";
+if (mysqli_query($conn, $sql)) {
+    echo "A tábla létrehozása sikeres" .'<br>';
+} else {
+    echo "Sikertelen SQL";
+}
+
+$sql = "CREATE TABLE IF NOT EXISTS SzeretNemSzeret (ID1 INT NOT NULL, ID2 INT NOT NULL, Kapcsolat ENUM('Szeret', 'Nemszeret'));";
+if (mysqli_query($conn, $sql)) {
+    echo "A tábla létrehozása sikeres" .'<br>';
+} else {
+    echo "Sikertelen SQL";
+}
+
+// Get form data
+$novNev = @$_POST['novNev'];
+$novLatin = @$_POST['novLatin'];
+$sortav = @$_POST['sortav'];
+$totav = @$_POST['totav'];
+$fajta = @$_POST['fajta'];
+
+// Check if Fajta with the same Sortavolsag and Totavolsag exists
+$sql = "SELECT FajtaId FROM Fajta WHERE Sortavolsag = $sortav AND Totavolsag = $totav";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    // If exists, get the FajtaId
+    $row = $result->fetch_assoc();
+    $fajtaId = $row['FajtaId'];
+} else {
+    // If not exists, insert new Fajta and get the FajtaId
+    $sql = "INSERT INTO Fajta (FajNev, Sortavolsag, Totavolsag) VALUES ('$fajta', $sortav, $totav)";
+    if ($conn->query($sql)) {
+        $fajtaId = $conn->insert_id; // Get the last inserted ID
+    } else {
+        echo "Sikertelen adatfelvétel a Fajta táblába";
+        $conn->close();
+        exit();
+    }
+}
+
+// Insert into Faj table with the FajtaId
+$sql = "INSERT INTO Faj (Nev, LatinNev, Sortavolsag, Totavolsag, FajtaID) VALUES ('$novNev', '$novLatin', $sortav, $totav, $fajtaId)";
+if ($conn->query($sql)) {
+    echo "Az adatfelvétel sikeres";
+} else {
+    echo "Sikertelen adatfelvétel a Faj táblába";
+}
+
+// Reset auto-increment for Faj table if necessary
+$sql = "SELECT MAX(FajId) AS max_id FROM Faj";
+$result = $conn->query($sql);
+$row = $result->fetch_assoc();
+$next_id = $row['max_id'] + 1;
+
+$sql = "ALTER TABLE Faj AUTO_INCREMENT = $next_id";
+$conn->query($sql);
+
+// Reset auto-increment for Fajta table if necessary
+$sql = "SELECT MAX(FajtaId) AS max_id FROM Fajta";
+$result = $conn->query($sql);
+$row = $result->fetch_assoc();
+$next_id = $row['max_id'] + 1;
+
+$sql = "ALTER TABLE Fajta AUTO_INCREMENT = $next_id";
+$conn->query($sql);
+
+$szeretMelyik = $_POST['szeretMellette'];
+$nemMelyik = $_POST['nemMellette'];
+
+$sql = "INSERT INTO SzeretNemSzeret (ID1, ID2, Kapcsolat) VALUES ($fajtaId, $szeretMelyik, 'Szeret')";
+$sql = "INSERT INTO SzeretNemSzeret (ID1, ID2, Kapcsolat) VALUES ($fajtaId, $nemMelyik, 'Nemszeret')";
+
 
         $conn->close();
     ?>
