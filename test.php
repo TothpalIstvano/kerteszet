@@ -48,6 +48,15 @@ mysqli_close($conn);*/
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="style.css">
   <title>Garden Planner</title>
+  <style>
+    #link {
+      display: none;
+    }
+
+    #link:target {
+      display: block;
+    }
+  </style>
 </head>
 <body>
 
@@ -76,61 +85,62 @@ mysqli_close($conn);*/
       <input id="quantity" name="quantity" placeholder="1" type="number" value="1" min="1">
       <br>
       <button id="add-plant">Nyövény hozzáadása</button>
-      <!--
-      <button id="extend-db" onclick="extendDB()">Extend Database</button>-->
+      
+      <a href="#link">Extend Database</a>
 
-    <form method="POST" action="addproba.php">
-        <table>
-            <tr>
-                <td>Növény neve: </td>
-                <td><input type="text" name = "novNev" id = "novNev" maxlength = "50"></td>
-            </tr>
-            <tr>
-                <td>Növény latin neve: </td>
-                <td><input type="text" name="novLatin" id="novLatin"></td>
-            </tr>
-            <tr>
-                <td>Növény sortávolsága: </td>
-                <td><input type="number" name="sortav" id="sortav"></td>
-            </tr>
-            <tr>
-                <td>Növény tőtávolsága: </td>
-                <td><input type="number" name="totav" id="totav"></td>
-            </tr>
-            <tr>
-                <td>Fajta: </td>
-                <td><input type="text" name="fajta" id="fajta"></td>
-            </tr>
-            <tr>
-              <td>Mi mellett szeret lenni:</td>
-              <td><select id="szeretMellette" name="szeretMellette">
-                <?php 
-                  $sql = "SELECT FajtaId, FajNev FROM Fajta";
-                  $result = mysqli_query($conn, $sql);
-                  foreach ($result as $row) {
-                    echo "<option value='" . $row['FajtaId'] . "'>" . $row['FajNev'] . "</option>";
-                  }
-                ?>
-              </select></td>
-            </tr>
-            <tr>
-              <td>Mi mellett NEM szeret lenni:</td>
-              <td><select id="nemMellette" name="nemMellette">
-                <?php 
-                  $sql = "SELECT FajtaId, FajNev FROM Fajta";
-                  $result = mysqli_query($conn, $sql);
-                  foreach ($result as $row) {
-                    echo "<option value='" . $row['FajtaId'] . "'>" . $row['FajNev'] . "</option>";
-                  }
-                ?>
-              </select></td>
-            </tr>
-            <tr style = "text-align: center;">
-                <td><input type="reset" value="Töröl"></td>
-                <td><input type="submit" value="Elküld"></td>
-            </tr>
-        </table>
-    </form>
+<form method="POST" action="addproba.php" id="link">
+    <table>
+        <tr>
+            <td>Növény neve: </td>
+            <td><input type="text" name = "novNev" id = "novNev" maxlength = "50"></td>
+        </tr>
+        <tr>
+            <td>Növény latin neve: </td>
+            <td><input type="text" name="novLatin" id="novLatin"></td>
+        </tr>
+        <tr>
+            <td>Növény sortávolsága: </td>
+            <td><input type="number" name="sortav" id="sortav"></td>
+        </tr>
+        <tr>
+            <td>Növény tőtávolsága: </td>
+            <td><input type="number" name="totav" id="totav"></td>
+        </tr>
+        <tr>
+            <td>Fajta: </td>
+            <td><input type="text" name="fajta" id="fajta"></td>
+        </tr>
+        <tr>
+          <td>Mi mellett szeret lenni:</td>
+          <td><select id="szeretMellette" name="szeretMellette">
+            <?php 
+              $sql = "SELECT FajtaId, FajNev FROM Fajta";
+              $result = mysqli_query($conn, $sql);
+              foreach ($result as $row) {
+                echo "<option value='" . $row['FajtaId'] . "'>" . $row['FajNev'] . "</option>";
+              }
+            ?>
+          </select></td>
+        </tr>
+        <tr>
+          <td>Mi mellett NEM szeret lenni:</td>
+          <td><select id="nemMellette" name="nemMellette">
+            <?php 
+              $sql = "SELECT FajtaId, FajNev FROM Fajta";
+              $result = mysqli_query($conn, $sql);
+              foreach ($result as $row) {
+                echo "<option value='" . $row['FajtaId'] . "'>" . $row['FajNev'] . "</option>";
+              }
+            ?>
+          </select></td>
+        </tr>
+        <tr style = "text-align: center;">
+            <td><input type="reset" value="Töröl"></td>
+            <td><input type="submit" value="Elküld"></td>
+            <td><a href="#">Vissza</a></td>
+        </tr>
+    </table>
+</form>
         <ul id="plant-list">
         <!-- Hozzá adott növények -->
         </ul>

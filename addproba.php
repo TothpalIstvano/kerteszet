@@ -88,25 +88,25 @@
 
 // Create tables if they don't exist
 $sql = "CREATE TABLE IF NOT EXISTS Faj (FajId INT AUTO_INCREMENT PRIMARY KEY, Nev VARCHAR(100) NOT NULL, LatinNev VARCHAR(100) NOT NULL, Sortavolsag INT, Totavolsag INT, FajtaID INT);";
-if (mysqli_query($conn, $sql)) {
+/*if (mysqli_query($conn, $sql)) {
     echo "A tábla létrehozása sikeres" .'<br>';
 } else {
     echo "Sikertelen SQL";
-}
+}*/
 
 $sql = "CREATE TABLE IF NOT EXISTS Fajta (FajtaId INT AUTO_INCREMENT PRIMARY KEY, FajNev VARCHAR(100) NOT NULL, Sortavolsag INT, Totavolsag INT);";
-if (mysqli_query($conn, $sql)) {
+/*if (mysqli_query($conn, $sql)) {
     echo "A tábla létrehozása sikeres" .'<br>';
 } else {
     echo "Sikertelen SQL";
-}
+}*/
 
 $sql = "CREATE TABLE IF NOT EXISTS SzeretNemSzeret (ID1 INT NOT NULL, ID2 INT NOT NULL, Kapcsolat ENUM('Szeret', 'Nemszeret'));";
-if (mysqli_query($conn, $sql)) {
+/*if (mysqli_query($conn, $sql)) {
     echo "A tábla létrehozása sikeres" .'<br>';
 } else {
     echo "Sikertelen SQL";
-}
+}*/
 
 // Get form data
 $novNev = @$_POST['novNev'];
@@ -137,11 +137,12 @@ if ($result->num_rows > 0) {
 
 // Insert into Faj table with the FajtaId
 $sql = "INSERT INTO Faj (Nev, LatinNev, Sortavolsag, Totavolsag, FajtaID) VALUES ('$novNev', '$novLatin', $sortav, $totav, $fajtaId)";
-if ($conn->query($sql)) {
+$conn->query($sql);
+/*if ($conn->query($sql)) {
     echo "Az adatfelvétel sikeres";
 } else {
     echo "Sikertelen adatfelvétel a Faj táblába";
-}
+}*/
 
 // Reset auto-increment for Faj table if necessary
 $sql = "SELECT MAX(FajId) AS max_id FROM Faj";
@@ -161,11 +162,11 @@ $next_id = $row['max_id'] + 1;
 $sql = "ALTER TABLE Fajta AUTO_INCREMENT = $next_id";
 $conn->query($sql);
 
-$szeretMelyik = $_POST['szeretMellette'];
+/*$szeretMelyik = $_POST['szeretMellette'];
 $nemMelyik = $_POST['nemMellette'];
 
 $sql = "INSERT INTO SzeretNemSzeret (ID1, ID2, Kapcsolat) VALUES ($fajtaId, $szeretMelyik, 'Szeret')";
-$sql = "INSERT INTO SzeretNemSzeret (ID1, ID2, Kapcsolat) VALUES ($fajtaId, $nemMelyik, 'Nemszeret')";
+$sql = "INSERT INTO SzeretNemSzeret (ID1, ID2, Kapcsolat) VALUES ($fajtaId, $nemMelyik, 'Nemszeret')";*/
 
 
         $conn->close();
