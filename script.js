@@ -245,6 +245,9 @@ rows.push(tr8);
 async function kertkeszito(){
   const szeleseg = document.getElementById("planter-width").value || 1;
   const hosszusag = document.getElementById("planter-length").value || 1;
+  if (isNaN(szeleseg))szeleseg = 1;
+  if (isNaN(hosszusag)) hosszusag = 1;
+
   let kertMatrix = new Array(szeleseg);
   let novenyListaHossz = document.getElementById("plant-list").children.length
   let novenyMatrix = new Array(novenyListaHossz);
@@ -256,13 +259,12 @@ async function kertkeszito(){
         kertMatrix[i][j] = true; // Fill with some values
       }
   }
-  console.log(kertMatrix);
 //#endregion
 
 //#region noveny matrix létrehozássa
   for (let i = 0; i < novenyListaHossz; i++) {
-    novenyMatrix[i] = new Array(7);
-      for (let j = 0; j < 7; j++) {
+    novenyMatrix[i] = new Array(8);
+      for (let j = 0; j < 8; j++) {
         novenyMatrix[i][j] = j;  // 0. nev
                                  // 1. mennyiseg
                                  // 2. sortavolsag
@@ -270,12 +272,23 @@ async function kertkeszito(){
                                  // 4. fajta
                                  // 5. szeret --> lista
                                  // 6. nem szeret --> lista
+                                 // 7. szín
         if(j == 5 || j == 6){
           novenyMatrix[i][j] = [];
         }
       }
   }
-  console.log(novenyMatrix);
+//#endregion
+
+//#region random szín
+function getRandomColor() {
+  var letters = '0123456789ABCDEF';
+  var color = '#';
+  for (var i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+}
 //#endregion
 
 //#region noveny matrix beolvasas
@@ -283,12 +296,12 @@ async function kertkeszito(){
       novenyMatrix[i][0] = document.getElementById("plant-list").children[i].textContent.replace("Delete", " ").trim().split(" x ")[1].trim()
       novenyMatrix[i][1] = parseInt(document.getElementById("plant-list").children[i].textContent.replace("Delete", " ").trim().split(" x ")[0].trim());
       const adat = await adatlekeres(novenyMatrix[i][0]);
-      console.log(adat);
       novenyMatrix[i][2] = adat.plant.Sortavolsag;
       novenyMatrix[i][3] = adat.plant.Totavolsag;
       novenyMatrix[i][4] = adat.plant.Fajta;
       novenyMatrix[i][5] = adat.likes;
       novenyMatrix[i][6] = adat.dislikes;
+      novenyMatrix[i][7] = getRandomColor();
   }
   console.log(novenyMatrix);
 //#endregion
@@ -321,14 +334,28 @@ async function kertkeszito(){
     }
 //#endregion
 
-  for (let i = 0; i < novenyListaHossz; i++) {
-    for (let j = 0; j < novenyMatrix[i][1]; j++) {
-    
+setTimeout(() => {
+    for (let i = 0; i < novenyListaHossz; i++) {
+      for (let j = 0; j < szeleseg; j+=Math.round(novenyMatrix[i][2]/10)) {
+        for (let k = 0; k < hosszusag; k+=Math.round(novenyMatrix[i][3]/10)) {
+          if (kertMatrix[j][k]&&novenyMatrix[i][1]>0) {
+            for (let l = 0; l < j; l++) {
+              kertMatrix[l][k] = false;
+            }
+            novenyMatrix[i][1]--;
+            console.log("novenyMatrix[i][7]:", novenyMatrix[i][7]);
+
+            kert.querySelector("table").querySelector("tbody").querySelectorAll("tr")[k].querySelectorAll("td")[j].style="background-color:"+novenyMatrix[i][7]+";";
+            
+          }
+        }
+      }
     }
-  } 
+    console.log("kertMatrix:", kertMatrix, "novenyMatrix:", novenyMatrix);
+  
+}, );
 }
 //#endregion
-
 
 //#region adat lekérése a php-ból
 async function adatlekeres(kereset){
