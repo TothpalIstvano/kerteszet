@@ -82,7 +82,7 @@ document.getElementById('add-plant').addEventListener('click', () => {
 //#endregion
 
 //#region form
-function adatFelForm(){
+/*function adatFelForm(){
   const hely = document.getElementById('addfel');
   const form = document.createElement('form');
   form.method = "POST";
@@ -155,6 +155,36 @@ function adatFelForm(){
   tr5.appendChild(td52);
   rows.push(tr5);
 
+fetch('opciok.php')
+  .then(response => response.json())
+  .then(optionsData => {
+ // Create the row
+const tr8 = document.createElement('tr');
+
+const td81 = document.createElement('td');
+td81.textContent = "Szeret: ";
+
+const td82 = document.createElement('td');
+const select8 = document.createElement('select');
+select8.name = "szeret";
+select8.id = "szeret";
+
+// Dynamically add options from the SQL data
+optionsData.forEach(option => {
+  const optionElement = document.createElement('option');
+  optionElement.value = option.id; // Use the ID from the SQL table
+  optionElement.textContent = option.name; // Use the name from the SQL table
+  select8.appendChild(optionElement);
+});
+
+td82.appendChild(select8);
+tr8.appendChild(td81);
+tr8.appendChild(td82);
+rows.push(tr8);
+  })
+  .catch(error => console.error('Error fetching options:', error));
+ 
+
   const tr6 = document.createElement('tr');
   const td61 = document.createElement('td');
   td61.style.textAlign = "center";
@@ -208,7 +238,7 @@ function adatFelForm(){
 
   document.getElementById('extend-db').remove();
   document.getElementById('gen').remove();
-}
+}*/
 //#endregion
 
 //#region Kertet elkészitő függvény
