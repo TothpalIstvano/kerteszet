@@ -46,9 +46,6 @@
 
   <div class="about-container">
     <h1>Garden Planner</h1>
-    <p>This is a simple garden planner proof of concept...</p>
-    <h2>Let's Set Up Your Bed!</h2>
-    <p>What we do is take the width (👈 to 👉) and length (👆 to 👇)...</p>
       <label for="width">How many feet wide is your planter?</label>
       <input id="planter-width" name="width" type="number" value="1" min="1">
       <br>
@@ -94,6 +91,10 @@
             <tr>
                 <td>Fajta: </td>
                 <td><input type="text" name="fajta" id="fajta"></td>
+            </tr>
+            <tr>
+              <td>Színe: </td>
+              <td><input type="color" name="szin" id="szin" value="#e77be7"></td>
             </tr>
             <tr>
               <td>Mi mellett szeret lenni:</td>
