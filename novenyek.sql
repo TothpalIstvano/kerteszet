@@ -4,7 +4,8 @@ CREATE TABLE Faj (
     LatinNev VARCHAR(100) NOT NULL,         -- Növény latin neve
     Sortavolsag INT,                       -- Sortávolság (cm)
     Totavolsag INT,                        -- Tőtávolság (cm)
-    FajtaID INT                           -- Fajta azonosítója
+    FajtaID INT,                           -- Fajta azonosítója
+    Szin VARCHAR(14)
 );
 
 CREATE TABLE Fajta (
@@ -25,27 +26,27 @@ CREATE TABLE SzeretNemSzeret (
 
 alter table Faj add foreign key (FajtaID) references Faj(FajId);
 
-INSERT INTO Faj (Nev, LatinNev, Sortavolsag, Totavolsag, FajtaID) VALUES
-('Vörösbab', 'Solanum lycopersicum', 60, 10, 1),
-('Fehérbab', 'Capsicum annuum', 60, 10, 1),
-('Jégbab', 'Cucumis sativus', 60, 10, 1),
-('Fürtös uborka', 'Cucumis sativus', 100, 20, 2),
-('Saláta uborka', 'Cucumis sativus', 100, 20, 2),
-('Kígyóuborka', 'Cucumis sativus', 100, 20, 2),
-('Francia levendula', 'Cucumis sativus', 150, 50, 3),
-('Édesburgonya', 'Cucumis sativus', 70, 30, 4),
-('Fejeskáposzta', 'Cucumis sativus', 30, 25, 5),
-('Karfiol', 'Cucumis sativus', 30, 25, 5),
-('Kínai káposzta', 'Cucumis sativus', 30, 25, 5),
-('Vöröskáposzta', 'Cucumis sativus', 30, 25, 5),
-('Koktélparadicsom', 'Cucumis sativus', 30, 50, 6),
-('Fejes saláta', 'Cucumis sativus', 25, 20, 7),
-('Jégsaláta', 'Cucumis sativus', 25, 20, 7),
-('Tépősaláta', 'Cucumis sativus', 25, 20, 7),
-('Sütőtök', 'Cucumis sativus', 150, 150, 8),
-('Főzőtök', 'Cucumis sativus', 150, 150, 8),
-('Rubin cékla', 'Cucumis sativus', 40, 15, 9),
-('Hagyományos cékla', 'Cucumis sativus', 40, 15, 9);
+INSERT INTO Faj (Nev, LatinNev, Sortavolsag, Totavolsag, FajtaID, Szin) VALUES
+('Vörösbab', 'Solanum lycopersicum', 60, 10, 1, '#871f10'),
+('Fehérbab', 'Capsicum annuum', 60, 10, 1, '#e3988d'),
+('Jégbab', 'Cucumis sativus', 60, 10, 1, '#33dbde'),
+('Fürtös uborka', 'Cucumis sativus', 100, 20, 2, '#41de33'),
+('Saláta uborka', 'Cucumis sativus', 100, 20, 2, '#1fab26'),
+('Kígyóuborka', 'Cucumis sativus', 100, 20, 2, '#12731c'),
+('Francia levendula', 'Cucumis sativus', 150, 50, 3, '#451296'),
+('Édesburgonya', 'Cucumis sativus', 70, 30, 4, '#965d12'),
+('Fejeskáposzta', 'Cucumis sativus', 30, 25, 5, '#409e26'),
+('Karfiol', 'Cucumis sativus', 30, 25, 5, '#94d950'),
+('Kínai káposzta', 'Cucumis sativus', 30, 25, 5, '#b9d950'),
+('Vöröskáposzta', 'Cucumis sativus', 30, 25, 5, '#8339cc'),
+('Koktélparadicsom', 'Cucumis sativus', 30, 50, 6, '#cc3940'),
+('Fejes saláta', 'Cucumis sativus', 25, 20, 7, '#43cc39'),
+('Jégsaláta', 'Cucumis sativus', 25, 20, 7, '#39cc91'),
+('Tépősaláta', 'Cucumis sativus', 25, 20, 7, '#348c3e'),
+('Sütőtök', 'Cucumis sativus', 150, 150, 8, '#8a4b08'),
+('Főzőtök', 'Cucumis sativus', 150, 150, 8, '#cc883f'),
+('Rubin cékla', 'Cucumis sativus', 40, 15, 9, '#9627d6'),
+('Hagyományos cékla', 'Cucumis sativus', 40, 15, 9, '#6d27d6');
 
 INSERT INTO Fajta (FajNev, Sortavolsag, Totavolsag) VALUES
 ('Bab', 60, 10),
