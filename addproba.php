@@ -87,7 +87,7 @@
 
 
 // Create tables if they don't exist
-$sql = "CREATE TABLE IF NOT EXISTS Faj (FajId INT AUTO_INCREMENT PRIMARY KEY, Nev VARCHAR(100) NOT NULL, LatinNev VARCHAR(100) NOT NULL, Sortavolsag INT, Totavolsag INT, FajtaID INT);";
+$sql = "CREATE TABLE IF NOT EXISTS Faj (FajId INT AUTO_INCREMENT PRIMARY KEY, Nev VARCHAR(100) NOT NULL, LatinNev VARCHAR(100) NOT NULL, Sortavolsag INT, Totavolsag INT, FajtaID INT, Szin VARCHAR(14));";
 /*if (mysqli_query($conn, $sql)) {
     echo "A tábla létrehozása sikeres" .'<br>';
 } else {
@@ -114,6 +114,7 @@ $novLatin = @$_POST['novLatin'];
 $sortav = @$_POST['sortav'];
 $totav = @$_POST['totav'];
 $fajta = @$_POST['fajta'];
+$szin = @$_POST['szin'];
 
 // Check if Fajta with the same Sortavolsag and Totavolsag exists
 $sql = "SELECT FajtaId FROM Fajta WHERE Sortavolsag = $sortav AND Totavolsag = $totav";
@@ -136,7 +137,7 @@ if ($result->num_rows > 0) {
 }
 
 // Insert into Faj table with the FajtaId
-$sql = "INSERT INTO Faj (Nev, LatinNev, Sortavolsag, Totavolsag, FajtaID) VALUES ('$novNev', '$novLatin', $sortav, $totav, $fajtaId)";
+$sql = "INSERT INTO Faj (Nev, LatinNev, Sortavolsag, Totavolsag, FajtaID, Szin) VALUES ('$novNev', '$novLatin', $sortav, $totav, $fajtaId, '$szin')";
 $conn->query($sql);
 /*if ($conn->query($sql)) {
     echo "Az adatfelvétel sikeres";
