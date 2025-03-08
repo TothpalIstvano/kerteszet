@@ -142,7 +142,11 @@ function getRandomColor() {
       novenyMatrix[i][4] = adat.plant.Fajta;
       novenyMatrix[i][5] = adat.likes;
       novenyMatrix[i][6] = adat.dislikes;
-      novenyMatrix[i][7] = getRandomColor();
+      if (adat.plant.Szin) {
+        novenyMatrix[i][7] = adat.plant.Szin;
+      } else {
+        novenyMatrix[i][7] = getRandomColor();
+      }
   }
   console.log(novenyMatrix);
 //#endregion
@@ -171,34 +175,70 @@ function getRandomColor() {
         const cell = document.createElement("td");
         cell.textContent = `${i},${j}`;
         row.appendChild(cell);
-      }
+      } 
       tbody.appendChild(row);
     }*/
 //#endregion
 
-setTimeout(() => {
+
     for (let i = 0; i < novenyListaHossz; i++) {
       for (let j = 0; j < szeleseg; j+=Math.round(novenyMatrix[i][2]/10)) {
         for (let k = 0; k < hosszusag; k+=Math.round(novenyMatrix[i][3]/10)) {
-          if (kertMatrix[j][k]&&novenyMatrix[i][1]>0) {
-            for (let l = 0; l < j; l++) {
-              kertMatrix[l][k] = false;
+          if (kertMatrix[j][k]==true&&novenyMatrix[i][1]>0) {
+            let viszonyit2 = Math.round(novenyMatrix[i][3]/10);
+            let viszonyit1 = Math.round(novenyMatrix[i][2]/10);
+            if(viszonyit2<0){
+              viszonyit2 = 0;
+            }
+            if(viszonyit1<0){
+              viszonyit1 = 0;
+            }
+            if(kertMatrix[j][k] === true &&kertMatrix[viszonyit1,viszonyit2]){
+              kertMatrix[j][k] = novenyMatrix[i][0];
             }
             novenyMatrix[i][1]--;
             console.log("novenyMatrix[i][7]:", novenyMatrix[i][7]);
-0
-            //kert.querySelector("table").querySelector("tbody").querySelectorAll("tr")[k].querySelectorAll("td")[j].style="background-color:"+novenyMatrix[i][7]+";";
-            console.log(document.getElementsByClassName("garden-item")[j+k], j,k);
-            if (document.getElementsByClassName("garden-item")[j+k]) {
-              document.getElementsByClassName("garden-item")[j+k].style="background-color:"+novenyMatrix[i][7]+";";
-            }
           }
         }
       }
     }
     console.log("kertMatrix:", kertMatrix, "novenyMatrix:", novenyMatrix);
-  
-}, );
+
+    for (let i = 0; i < kertMatrix.length; i++) {
+      for (let j = 0; j <= kertMatrix[i].length; j++) {
+        if(kertMatrix[i][j] != true){
+          for(let k = 0; k < novenyMatrix.length; k++){
+            if(kertMatrix[i][j] === novenyMatrix[k][0] && i==0){
+              document.getElementsByClassName("garden-item")[i+j].style = `background-color: ${novenyMatrix[k][7]};`;
+              console.log(kertMatrix[i][j], novenyMatrix[k][0], i, j, k);
+            }
+            else if(kertMatrix[i][j] === novenyMatrix[k][0] && i>0){
+              document.getElementsByClassName("garden-item")[i*10+j].style = `background-color: ${novenyMatrix[k][7]};`;
+              console.log(kertMatrix[i][j], novenyMatrix[k][0], i, j, k);
+            }
+            else if(kertMatrix[i][j] === novenyMatrix[k][0] && i>0 && j>0){
+              document.getElementsByClassName("garden-item")[i*10+j].style = `background-color: ${novenyMatrix[k][7]};`;
+              console.log(kertMatrix[i][j], novenyMatrix[k][0], i, j, k);
+            }
+          }
+        }
+      }
+    }
+
+    if(novenyMatrix.length == 1 && novenyMatrix[0][1] == 1  && document.getElementsByClassName("garden-item").length == 0){
+      document.getElementsByClassName("garden-item")[0].style = `background-color: ${novenyMatrix[0][7]};`;
+    }
+
+    let kimaradt = [];
+    novenyMatrix.forEach(element => {
+      if (element[1] > 0) {
+        kimaradt.push(element[0]);
+      }
+    });
+    if(kimaradt.length>0){
+      alert(kimaradt);
+    }
+    
 }
 //#endregion
 
