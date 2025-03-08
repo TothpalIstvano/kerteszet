@@ -148,6 +148,7 @@ function getRandomColor() {
 //#endregion
 
 //#region kert átépités
+/*
     const gardenPlanter = document.querySelector(".garden-bed");
     gardenPlanter.innerHTML = ""; // Clear existing items
     gardenPlanter.style = "border: #ffffff00;";
@@ -172,7 +173,7 @@ function getRandomColor() {
         row.appendChild(cell);
       }
       tbody.appendChild(row);
-    }
+    }*/
 //#endregion
 
 setTimeout(() => {
@@ -185,9 +186,12 @@ setTimeout(() => {
             }
             novenyMatrix[i][1]--;
             console.log("novenyMatrix[i][7]:", novenyMatrix[i][7]);
-
-            kert.querySelector("table").querySelector("tbody").querySelectorAll("tr")[k].querySelectorAll("td")[j].style="background-color:"+novenyMatrix[i][7]+";";
-            
+0
+            //kert.querySelector("table").querySelector("tbody").querySelectorAll("tr")[k].querySelectorAll("td")[j].style="background-color:"+novenyMatrix[i][7]+";";
+            console.log(document.getElementsByClassName("garden-item")[j+k], j,k);
+            if (document.getElementsByClassName("garden-item")[j+k]) {
+              document.getElementsByClassName("garden-item")[j+k].style="background-color:"+novenyMatrix[i][7]+";";
+            }
           }
         }
       }
