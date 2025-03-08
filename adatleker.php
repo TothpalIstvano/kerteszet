@@ -19,7 +19,7 @@ try {
 
         // Növény alapadatainak lekérése
         $stmt = $pdo->prepare("
-            SELECT Faj.Nev, Faj.Sortavolsag, Faj.Totavolsag, Fajta.FajNev
+            SELECT Faj.Nev, Faj.Sortavolsag, Faj.Totavolsag, Fajta.FajNev, Faj.Szin
             FROM Faj
             JOIN Fajta ON Faj.FajtaID = Fajta.FajtaID
             WHERE Faj.Nev = :plant
