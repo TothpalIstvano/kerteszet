@@ -175,7 +175,7 @@ function getRandomColor() {
         const cell = document.createElement("td");
         cell.textContent = `${i},${j}`;
         row.appendChild(cell);
-      }
+      } 
       tbody.appendChild(row);
     }*/
 //#endregion
