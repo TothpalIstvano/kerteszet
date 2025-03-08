@@ -9,47 +9,15 @@
     <?php include 'style.css'; ?>
   </style>  
   <title>Garden Planner</title>
-  <style>
-    #link {
-      display: none;
-    }
-
-    #link:target {
-      display: block;
-    }
-
-    #gombs {
-      padding-top: 10px;
-      padding-bottom: 10px;
-    }
-
-    #gomb {
-      text-decoration: none;
-      background: green;
-      color: black;
-      font-size: 13px;
-      padding: 1px;
-      border: 1px solid black;
-    }
-
-    #vissza {
-      text-decoration: none;
-      background: purple;
-      color: black;
-      font-size: 13px;
-      padding: 1px;
-      border: 1px solid black;
-    }
-  </style>
 </head>
 <body>
 
   <div class="about-container">
     <h1>Garden Planner</h1>
-      <label for="width">How many feet wide is your planter?</label>
+      <label for="width">Milyen széles legyen a kerted? (*10cm)</label>
       <input id="planter-width" name="width" type="number" value="1" min="1">
       <br>
-      <label for="length">How many feet long is your planter?</label>
+      <label for="length">Milyen hosszú legyen a kerted? (*10cm)</label>
       <input id="planter-length" name="length" type="number" value="1" min="1">
       <br>
     <label for="plant">Növény kiválasztása:</label>
@@ -68,7 +36,7 @@
       <br>
       <div id="gombs">
         <button id="add-plant">Nyövény hozzáadása</button>
-        <a href="#link" id="gomb">Extend Database</a>
+        <a href="#link" id="gomb">Új növény felvétele</a>
 
     <form method="POST" action="addproba.php" id="link">
         <table>
@@ -121,8 +89,8 @@
               </select></td>
             </tr>
             <tr style = "text-align: center;">
-                <td><input type="reset" value="Töröl"></td>
-                <td><input type="submit" value="Elküld"></td>
+                <td><input type="reset" value="Töröl" id="torol"></td>
+                <td><input type="submit" value="Elküld" id="elkuld"></td>
                 <td><a href="#" id="vissza">Bezár</a></td>
             </tr>
         </table>

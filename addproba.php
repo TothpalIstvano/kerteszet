@@ -163,14 +163,14 @@ $next_id = $row['max_id'] + 1;
 $sql = "ALTER TABLE Fajta AUTO_INCREMENT = $next_id";
 $conn->query($sql);
 
-/*$szeretMelyik = $_POST['szeretMellette'];
-$nemMelyik = $_POST['nemMellette'];
+$szeretMellette = $_POST['szeretMellette'];
+$nemMellette = $_POST['nemMellette'];
 
-$sql = "INSERT INTO SzeretNemSzeret (ID1, ID2, Kapcsolat) VALUES ($fajtaId, $szeretMelyik, 'Szeret')";
-$sql = "INSERT INTO SzeretNemSzeret (ID1, ID2, Kapcsolat) VALUES ($fajtaId, $nemMelyik, 'Nemszeret')";*/
+$sql1 = "INSERT INTO SzeretNemSzeret (ID1, ID2, Kapcsolat) VALUES ($fajtaId, $szeretMellette, 'Szeret')";
+$sql2 = "INSERT INTO SzeretNemSzeret (ID1, ID2, Kapcsolat) VALUES ($fajtaId, $nemMellette, 'Nemszeret')";
 
 
-        $conn->close();
+$conn->close();
     ?>
 
 
