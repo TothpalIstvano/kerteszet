@@ -47,4 +47,77 @@ body {/*https://i.pinimg.com/736x/4a/79/4a/4a794a1d167cc9373a6d1bd2ba7d5f81.jpg 
         background-color: #8c7851;
     }
 
- 
+    #link {
+      display: none;
+    }
+
+    #link:target {
+      display: block;
+    }
+
+    #gombs {
+      padding-top: 5px;
+      padding-bottom: 10px;
+    }
+
+    #gomb {
+      text-decoration: none;
+      background: rgb(194, 239, 137);
+      color: black;
+      font-size: 13px;
+      padding-bottom: 1px;
+      padding-left: 2px;
+      padding-right: 2px;
+      border: 1px solid black;
+      box-shadow: #55423d 1px 1px 1px 1px;
+      font-weight: 600;
+    }
+
+    #vissza {
+      text-decoration: none;
+      background: rgb(230, 103, 133);
+      color: black;
+      font-size: 13px;
+      padding-bottom: 1px;
+      padding-left: 2px;
+      padding-right: 2px;
+      border: 1px solid black;
+      box-shadow: #55423d 1px 1px 1px 1px;
+      font-weight: 600;
+    }
+
+#gen {
+  background-color: rgb(49, 199, 74);
+  font-size: 13px;
+  border-style: none;
+  border: 1px solid black;
+  box-shadow: #55423d 1px 1px 1px 1px;
+  font-weight: 600;
+} 
+
+#add-plant {
+  background-color: rgb(234, 192, 170);
+  font-size: 13px;
+  border-style: none;
+  border: 1px solid black;
+  box-shadow: #55423d 1px 1px 1px 1px;
+  font-weight: 600;
+}
+
+#torol {
+  background-color: rgb(252, 86, 86);
+  font-size: 13px;
+  border-style: none;
+  border: 1px solid black;
+  box-shadow: #55423d 1px 1px 1px 1px;
+  font-weight: 600;
+}
+
+#elkuld {
+  background-color: rgb(91, 170, 74);
+  font-size: 13px;
+  border-style: none;
+  border: 1px solid black;
+  box-shadow: #55423d 1px 1px 1px 1px;
+  font-weight: 600;
+}
