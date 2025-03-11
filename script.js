@@ -151,42 +151,41 @@ function getRandomColor() {
   console.log(novenyMatrix);
 //#endregion
 
-//#region kert átépités
-/*
-    const gardenPlanter = document.querySelector(".garden-bed");
-    gardenPlanter.innerHTML = ""; // Clear existing items
-    gardenPlanter.style = "border: #ffffff00;";
-    const kert = document.getElementById("kert");
-    let table = kert.querySelector("table");
-    if (!table) {
-      table = document.createElement("table");
-      kert.appendChild(table);
-    }
-    let tbody = table.querySelector("tbody");
-    if (!tbody) {
-      tbody = document.createElement("tbody");
-      table.appendChild(tbody);
-    } else {
-      tbody.innerHTML = ""; // Clear existing rows
-    }
-    for (let i = 0; i < hosszusag; i++) {
-      const row = document.createElement("tr");
-      for (let j = 0; j < szeleseg; j++) {
-        const cell = document.createElement("td");
-        cell.textContent = `${i},${j}`;
-        row.appendChild(cell);
-      } 
-      tbody.appendChild(row);
-    }*/
-//#endregion
-
-
     for (let i = 0; i < novenyListaHossz; i++) {
-      for (let j = 0; j < szeleseg; j+=Math.round(novenyMatrix[i][2]/10)) {
-        for (let k = 0; k < hosszusag; k+=Math.round(novenyMatrix[i][3]/10)) {
+      let enemyTalan = false;
+      let viszonyit2 = Math.round(novenyMatrix[i][3]/10);
+      let viszonyit1 = Math.round(novenyMatrix[i][2]/10);
+      if(i>0){
+        let ii = 0;
+        while(ii<novenyMatrix[i-1][6].length&&novenyMatrix[i][0]!=novenyMatrix[i-1][6][ii]){
+          ii++;
+        }
+        if(ii<novenyMatrix[i-1][6].length){
+          enemyTalan = true;
+        }
+      }
+      if(enemyTalan){
+        viszonyit2++;
+        viszonyit1++;
+      }
+      /*
+        ki kell false-olni=>{
+            ha nem nulla tő táv->akkor menjen vissza fele egy for amely nulláza a === true helyeket a növényt nem bántja
+            ez a tő távra vonatkozik
+
+            ha nem nulla sor tav->akkor menjen vissza fele egy for amely nulláza a === true helyeket a növényt nem bántja
+          }
+          
+
+        ha false akkor keresse vissza nézze meg a sortávolságot és a tötávolságot ha nagyobb akkor arra a sorra azt használja
+        majd ha meg van állítsa vissza
+        ha nem szeret akkor sortáv ++
+        ha sorban benne van már akkor tőtáv ++
+
+      */
+      for (let j = 0; j < szeleseg; j+=viszonyit1) {
+        for (let k = 0; k < hosszusag; k+=viszonyit2) {
           if (kertMatrix[j][k]==true&&novenyMatrix[i][1]>0) {
-            let viszonyit2 = Math.round(novenyMatrix[i][3]/10);
-            let viszonyit1 = Math.round(novenyMatrix[i][2]/10);
             if(viszonyit2<0){
               viszonyit2 = 0;
             }
@@ -229,14 +228,16 @@ function getRandomColor() {
       document.getElementsByClassName("garden-item")[0].style = `background-color: ${novenyMatrix[0][7]};`;
     }
 
-    let kimaradt = [];
+    let kimaradt ="";
     novenyMatrix.forEach(element => {
       if (element[1] > 0) {
-        kimaradt.push(element[0]);
+        kimaradt+=(`${element[1]} x ${element[0]}\n`);
       }
     });
     if(kimaradt.length>0){
-      alert(kimaradt);
+      setTimeout(() => {
+        alert(kimaradt);
+      }, 500);
     }
     
 }
