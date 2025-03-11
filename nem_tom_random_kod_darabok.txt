@@ -12,3 +12,35 @@ function megcsinál(){
     }
   }
 }
+
+
+
+
+//#region kert átépités
+/*
+    const gardenPlanter = document.querySelector(".garden-bed");
+    gardenPlanter.innerHTML = ""; // Clear existing items
+    gardenPlanter.style = "border: #ffffff00;";
+    const kert = document.getElementById("kert");
+    let table = kert.querySelector("table");
+    if (!table) {
+      table = document.createElement("table");
+      kert.appendChild(table);
+    }
+    let tbody = table.querySelector("tbody");
+    if (!tbody) {
+      tbody = document.createElement("tbody");
+      table.appendChild(tbody);
+    } else {
+      tbody.innerHTML = ""; // Clear existing rows
+    }
+    for (let i = 0; i < hosszusag; i++) {
+      const row = document.createElement("tr");
+      for (let j = 0; j < szeleseg; j++) {
+        const cell = document.createElement("td");
+        cell.textContent = `${i},${j}`;
+        row.appendChild(cell);
+      } 
+      tbody.appendChild(row);
+    }*/
+//#endregion
