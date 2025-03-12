@@ -60,6 +60,7 @@ document.getElementById('add-plant').addEventListener('click', () => {
       const currentQuantity = parseInt(child.textContent.split(' x ')[0]);
       child.textContent = `${currentQuantity + parseInt(quantity)} x ${plant}`;
       const deleteBtn = document.createElement('button');
+      deleteBtn.id = 'deletegomb';
       deleteBtn.textContent = 'Delete';
       deleteBtn.onclick = () => {
         child.remove();
@@ -73,6 +74,7 @@ document.getElementById('add-plant').addEventListener('click', () => {
     const li = document.createElement('li');
     li.textContent = `${quantity} x ${plant}`;
     const deleteBtn = document.createElement('button');
+    deleteBtn.id = 'deletegomb';
     deleteBtn.textContent = 'Delete';
     deleteBtn.onclick = () => li.remove();
     li.appendChild(deleteBtn);
