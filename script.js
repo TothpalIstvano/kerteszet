@@ -61,7 +61,9 @@ document.getElementById('add-plant').addEventListener('click', () => {
       child.textContent = `${currentQuantity + parseInt(quantity)} x ${plant}`;
       const deleteBtn = document.createElement('button');
       deleteBtn.textContent = 'Delete';
-      deleteBtn.onclick = () => child.remove();
+      deleteBtn.onclick = () => {
+        child.remove();
+      }
       child.appendChild(deleteBtn);
       van = true;
       
@@ -150,11 +152,12 @@ function getRandomColor() {
   }
   console.log(novenyMatrix);
 //#endregion
-
+let enemyTalan = false;
     for (let i = 0; i < novenyListaHossz; i++) {
-      let enemyTalan = false;
+      enemyTalan = false;
       let viszonyit2 = Math.round(novenyMatrix[i][3]/10);
       let viszonyit1 = Math.round(novenyMatrix[i][2]/10);
+      console.log(enemyTalan, viszonyit1, viszonyit2)
       if(i>0){
         let ii = 0;
         while(ii<novenyMatrix[i-1][6].length&&novenyMatrix[i][0]!=novenyMatrix[i-1][6][ii]){
@@ -168,12 +171,13 @@ function getRandomColor() {
         viszonyit2++;
         viszonyit1++;
       }
+      console.log(enemyTalan, viszonyit1, viszonyit2)
       /*
         ki kell false-olni=>{
-            ha nem nulla tő táv->akkor menjen vissza fele egy for amely nulláza a === true helyeket a növényt nem bántja
+            ha nem nulla tő táv->akkor menjen vissza fele egy for amely nulláza a === true helyeket a növényt nem bántja  ?✓
             ez a tő távra vonatkozik
 
-            ha nem nulla sor tav->akkor menjen vissza fele egy for amely nulláza a === true helyeket a növényt nem bántja
+            ha nem nulla sor tav->akkor menjen vissza fele egy for amely nulláza a === true helyeket a növényt nem bántja ?✓
           }
           
 
@@ -183,8 +187,17 @@ function getRandomColor() {
         ha sorban benne van már akkor tőtáv ++
 
       */
-      for (let j = 0; j < szeleseg; j+=viszonyit1) {
-        for (let k = 0; k < hosszusag; k+=viszonyit2) {
+      for (let j = 0; j < szeleseg; j+=viszonyit1) { // --> sortav
+        for (let k = 0; k < hosszusag; k+=viszonyit2) { // --> totav
+          if(k!=0){
+            for (let p = 0; p < j; p++) {
+              for (let q = 0; q < k; q++) {
+                if(kertMatrix[p][q] === true){
+                  kertMatrix[p][q] = false
+                }
+              }
+            }
+          }
           if (kertMatrix[j][k]==true&&novenyMatrix[i][1]>0) {
             if(viszonyit2<0){
               viszonyit2 = 0;
@@ -209,15 +222,12 @@ function getRandomColor() {
           for(let k = 0; k < novenyMatrix.length; k++){
             if(kertMatrix[i][j] === novenyMatrix[k][0] && i==0){
               document.getElementsByClassName("garden-item")[i+j].style = `background-color: ${novenyMatrix[k][7]};`;
-              console.log(kertMatrix[i][j], novenyMatrix[k][0], i, j, k);
             }
             else if(kertMatrix[i][j] === novenyMatrix[k][0] && i>0){
               document.getElementsByClassName("garden-item")[i*10+j].style = `background-color: ${novenyMatrix[k][7]};`;
-              console.log(kertMatrix[i][j], novenyMatrix[k][0], i, j, k);
             }
             else if(kertMatrix[i][j] === novenyMatrix[k][0] && i>0 && j>0){
               document.getElementsByClassName("garden-item")[i*10+j].style = `background-color: ${novenyMatrix[k][7]};`;
-              console.log(kertMatrix[i][j], novenyMatrix[k][0], i, j, k);
             }
           }
         }
@@ -264,38 +274,12 @@ async function adatlekeres(kereset){
 
 //#region leírás
 /*
-plant-list --> db, név kiszed
-fetch --> post-olás adat lekerés php-nak
-    .then --> bejövő adat vissza transformálása
-    .then --> elsőnek azt amelyik a legkevesebbet szereti vagy a legkisebb sortővű növény kiválasztása
-    .then --> szeret nem szeret tábla alapján kiválasztás --> ha többet is szeret és nem szélen van akkor azt amelyik 2 vagy többet szeret --> ha mindkettő akkor rnd
+plant-list --> db, név kiszed ✓
+fetch --> post-olás adat lekerés php-nak✓
+    .then --> bejövő adat vissza transformálása✓
+    .then --> elsőnek azt amelyik a legkevesebbet szereti vagy a legkisebb sortővű növény kiválasztása \-?-/ ✓???????
+    .then --> szeret nem szeret tábla alapján kiválasztás --> ha többet is szeret és nem szélen van akkor azt amelyik 2 vagy többet szeret --> ha mindkettő akkor rnd ??
 */
 //#endregion
 
-//#region feles kodok
-/*
 
-kert.querySelector("table").querySelector("tbody").querySelectorAll("tr")[0].querySelectorAll("td")[2].style="background-color: rgb(255, 0, 0);";
-
-
-
-
-
-  gardenPlanter.style="border: solid 10px #55423d;";
-  const kert = document.getElementById("kert");
-  while (kert.firstChild) {
-    kert.removeChild(kert.firstChild);
-  }
-
-const plantSelect = document.getElementById("plant");
-  const options = plantSelect.options;
-  const adatok = [];
-  for (let i = 0; i < options.length; i++) {
-    const adat = await adatlekeres(options[i].value);
-    adatok.push(adat);
-    console.log(adat.plants[0].Nev);
-  }
-  console.log(adatok);
-
-*/
-//#endregion

@@ -44,3 +44,32 @@ function megcsinál(){
       tbody.appendChild(row);
     }*/
 //#endregion
+
+
+//#region feles kodok
+/*
+
+kert.querySelector("table").querySelector("tbody").querySelectorAll("tr")[0].querySelectorAll("td")[2].style="background-color: rgb(255, 0, 0);";
+
+
+
+
+
+  gardenPlanter.style="border: solid 10px #55423d;";
+  const kert = document.getElementById("kert");
+  while (kert.firstChild) {
+    kert.removeChild(kert.firstChild);
+  }
+
+const plantSelect = document.getElementById("plant");
+  const options = plantSelect.options;
+  const adatok = [];
+  for (let i = 0; i < options.length; i++) {
+    const adat = await adatlekeres(options[i].value);
+    adatok.push(adat);
+    console.log(adat.plants[0].Nev);
+  }
+  console.log(adatok);
+
+*/
+//#endregion
