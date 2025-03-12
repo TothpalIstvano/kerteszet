@@ -13,12 +13,12 @@
 <body>
 
   <div class="about-container">
-    <h1>Garden Planner</h1>
+    <h1>Kerttervező</h1>
       <label for="width">Milyen széles legyen a kerted? (*10cm)</label>
-      <input id="planter-width" name="width" type="number" value="1" min="1">
+      <input id="planter-width" name="width" type="number" placeholder="10" min="1">
       <br>
       <label for="length">Milyen hosszú legyen a kerted? (*10cm)</label>
-      <input id="planter-length" name="length" type="number" value="1" min="1">
+      <input id="planter-length" name="length" type="number" placeholder="10" min="1">
       <br>
     <label for="plant">Növény kiválasztása:</label>
       <select id="plant" name="plant">
@@ -35,7 +35,7 @@
       <input id="quantity" name="quantity" placeholder="1" type="number" value="1" min="1">
       <br>
       <div id="gombs">
-        <button id="add-plant">Nyövény hozzáadása</button>
+        <button id="add-plant">Növény hozzáadása</button>
         <a href="#link" id="gomb">Új növény felvétele</a>
 
     <form method="POST" action="addproba.php" id="link">

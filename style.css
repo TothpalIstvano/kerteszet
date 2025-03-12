@@ -22,15 +22,15 @@ body {/*https://i.pinimg.com/736x/4a/79/4a/4a794a1d167cc9373a6d1bd2ba7d5f81.jpg 
     
     .container {
       height: 100%;
-      width: calc(var(--width) * 60px);
+      /*width: calc(var(--width) * 60px);*/
       margin: auto;
     }
     
     .garden-bed {
-      border: solid 10px #55423d;
+      border: solid 5px #55423d;
       display: grid;
-      grid-template-rows: repeat(var(--length), 0.6fr);
-      grid-template-columns: repeat(var(--width), 0.6fr);
+      grid-template-rows: repeat(var(--length), 0fr);
+      grid-template-columns: repeat(var(--width), 0fr); /*ha ez mínuszban van egymás alá megy minden sor (miért??? idk)*/
     }
     
     .garden-item {
@@ -43,7 +43,7 @@ body {/*https://i.pinimg.com/736x/4a/79/4a/4a794a1d167cc9373a6d1bd2ba7d5f81.jpg 
         -ms-flex-pack: center;
         justify-content: center;
         min-height: 10px;
-        padding: 16px;
+        padding: 10px;
         background-color: #8c7851;
     }
 
@@ -120,4 +120,14 @@ body {/*https://i.pinimg.com/736x/4a/79/4a/4a794a1d167cc9373a6d1bd2ba7d5f81.jpg 
   border: 1px solid black;
   box-shadow: #55423d 1px 1px 1px 1px;
   font-weight: 600;
+}
+
+#deletegomb {
+  background-color: rgb(252, 86, 86);
+  font-size: 13px;
+  border-style: none;
+  border: 1px solid black;
+  box-shadow: #55423d 1px 1px 1px 1px;
+  font-weight: 600;
+  margin-left: 5px;
 }
