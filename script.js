@@ -266,11 +266,9 @@ function getRandomColor() {
           for(let k = 0; k < novenyMatrix.length; k++){
             if(kertMatrix[i][j] == novenyMatrix[k][0] && i==0){
               document.getElementsByClassName("garden-item")[i+j].style = `background-color: ${novenyMatrix[k][7]};`;
-              console.log(i, j);
             }
             if(kertMatrix[i][j] == novenyMatrix[k][0] && (i>0 || j>0)){
               document.getElementsByClassName("garden-item")[i*10+j].style = `background-color: ${novenyMatrix[k][7]};`;
-              console.log(i, j, "i*10+j");
             }
             if(szeleseg%2!=0 && hosszusag%2!=0 && hosszusag!=szeleseg &&szeleseg/hosszusag>0 && kertMatrix[i][j] == novenyMatrix[k][0] && (i>0 || j>0)){
               document.getElementsByClassName("garden-item")[szeleseg-1].style = `background-color: ${novenyMatrix[k][7]};`;
