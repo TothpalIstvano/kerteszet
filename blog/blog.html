@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="hu">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Legfrissebb blogbejegyzések</title>
+    <link rel="stylesheet" href="./blog.css" />
+    <script type="importmap">
+      {
+        "imports": {
+          "vue": "https://unpkg.com/vue@3.5.12/dist/vue.esm-browser.js"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div id="app">
+      <section class="page">
+        <h1 class="title">Legfrissebb blogbejegyzések</h1>
+        <p class="subtitle">
+          Inspirálódj közösségünk tapasztalataiból! Tippek, technikák és ötletek a
+          kézművesség szerelmeseinek.
+        </p>
+
+        <div class="filters">
+          <button
+            v-for="t in availableTags"
+            :key="t"
+            class="chip"
+            :class="{ active: selectedTags.has(t) }"
+            @click="toggleTag(t)"
+          >
+            {{ t }}
+          </button>
+          <button v-if="selectedTags.size" class="clear" @click="clearTags">
+            Szűrők törlése
+          </button>
+        </div>
+
+        <div class="grid">
+          <article v-for="post in filteredPosts" :key="post.id" class="card">
+            <div class="thumb">
+              <img :src="post.cover" :alt="post.title" loading="lazy" />
+              <span class="tag" :style="{ background: tagColor(post.primaryTag) }">{{ post.primaryTag }}</span>
+            </div>
+
+            <header class="card-head">
+              <h3 class="card-title">{{ post.title }}</h3>
+            </header>
+
+            <p class="excerpt">{{ post.excerpt }}</p>
+
+            <footer class="meta">
+              <div class="left">
+                <span class="author">{{ post.author }}</span>
+                <span class="dot">•</span>
+                <time :datetime="post.dateISO">{{ formatDate(post.dateISO) }}</time>
+                <span class="dot">•</span>
+                <span>{{ post.readMins }} perc</span>
+              </div>
+              <button class="more" @click="openPost(post)">Olvass tovább →</button>
+            </footer>
+          </article>
+        </div>
+      </section>
+
+      <dialog ref="dialogEl" class="post-dialog">
+        <article v-if="activePost" class="post">
+          <header>
+            <h2>{{ activePost.title }}</h2>
+            <button class="close" @click="closePost">✕</button>
+          </header>
+          <img class="hero" :src="activePost.cover" :alt="activePost.title" />
+          <div class="content" v-html="activePost.content"></div>
+        </article>
+      </dialog>
+    </div>
+
+    <script type="module" src="./blog.js"></script>
+  </body>
+</html>
