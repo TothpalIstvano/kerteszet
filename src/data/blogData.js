@@ -46,6 +46,54 @@ export const blogPosts = [
     comments: 9,
     tags: ['Kötés', 'Kezdő'],
     image: 'https://images.unsplash.com/photo-1559330079-b289846a58d9?w=800'
+  },
+  {
+    id: 5,
+    title: 'Makramé faliképek készítése otthon',
+    excerpt: 'A makramé modern és stílusos díszítő elem. Fedezd fel a csomózás művészetét és készítsd el saját faliképedet.',
+    author: 'Tóth Eszter',
+    date: '2024.03.18',
+    readingTime: '10 perc',
+    likes: 63,
+    comments: 18,
+    tags: ['Kézművesség', 'DIY'],
+    image: 'https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?w=800'
+  },
+  {
+    id: 6,
+    title: 'Gyönyörű horgolt takarók téli estékre',
+    excerpt: 'Meleg és hangulatos takarók készítése horgolással. Tippek és minták kezdőknek és haladóknak.',
+    author: 'Molnár Rita',
+    date: '2024.03.05',
+    readingTime: '12 perc',
+    likes: 71,
+    comments: 22,
+    tags: ['Horgolás'],
+    image: 'https://images.unsplash.com/photo-1617196034204-0a9c1d0b5fb0?w=800'
+  },
+  {
+    id: 7,
+    title: 'Kreatív DIY ajándékötletek minden alkalomra',
+    excerpt: 'Személyes és különleges ajándékok házilag. Készíts egyedi meglepetéseket szeretteidnek!',
+    author: 'Farkas Zsófia',
+    date: '2024.03.20',
+    readingTime: '9 perc',
+    likes: 89,
+    comments: 25,
+    tags: ['DIY', 'Kézművesség'],
+    image: 'https://images.unsplash.com/photo-1513885535751-8b9238bd345a?w=800'
+  },
+  {
+    id: 8,
+    title: 'Kötött sapkák és sálak: A téli alapok',
+    excerpt: 'Klasszikus téli kiegészítők kötése egyszerű lépésekben. Tartsd melegen magad stílusosan!',
+    author: 'Varga Linda',
+    date: '2024.02.28',
+    readingTime: '11 perc',
+    likes: 52,
+    comments: 14,
+    tags: ['Kötés', 'Kezdő'],
+    image: 'https://images.unsplash.com/photo-1544923246-77307dd19b9b?w=800'
   }
 ]
 

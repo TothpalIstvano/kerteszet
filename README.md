@@ -6,10 +6,14 @@ A modern, responsive blog system built with Vue 3 and Vite, featuring a tag-base
 
 - 📝 Blog post cards with images, titles, excerpts, and metadata
 - 🏷️ Tag-based filtering system
-- 👤 Author information with avatars
+- 🔍 Real-time search functionality (search by title, content, author, or tags)
+- 📊 Sorting options (by date, likes, or comments)
+- 📈 Blog statistics dashboard (total posts, likes, comments, and tags)
+- 👤 Author information
 - 📅 Publication dates
 - ⏱️ Reading time estimates
 - ❤️ Like and comment counters
+- ✨ Smooth animations and transitions
 - 📱 Fully responsive design
 - 🎨 Beautiful gradient background with glassmorphism effects
 
