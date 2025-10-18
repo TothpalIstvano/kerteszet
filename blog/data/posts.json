@@ -1,0 +1,32 @@
+[
+  {
+    "title": "Tavaszi minták: Készítsd el a legszebb virágos kendőt",
+    "excerpt": "Ebben a cikkben megmutatom, hogyan készíthetsz el egy gyönyörű virágos kendőt egyszerű technikákkal.",
+    "content": "<p>Részletes, képekkel illusztrált útmutató a tavaszi kendőhöz. Alapanyagok, lépések és tippek a hibák elkerülésére.</p>",
+    "author": "Kovács Mária",
+    "dateISO": "2024-03-15",
+    "readMins": 5,
+    "tags": ["Kötés"],
+    "cover": "https://images.unsplash.com/photo-1483181957632-8bda9740f21e?q=80&w=1656&auto=format&fit=crop"
+  },
+  {
+    "title": "Horgolási alapok: Lépésről lépésre a láncolásig",
+    "excerpt": "Kezdő útmutató a horgoláshoz. Megtanulhatod az alapvető technikákat, amelyekkel bármilyen mintát elkészíthetsz.",
+    "content": "<p>Az első szemek elkészítése, láncszem, rövidpálca és az alap befejezési technikák. Gyakori hibák és megoldások.</p>",
+    "author": "Nagy Anna",
+    "dateISO": "2024-03-12",
+    "readMins": 8,
+    "tags": ["Horgolás"],
+    "cover": "https://images.unsplash.com/photo-1556228453-efd1c091ecc1?q=80&w=1772&auto=format&fit=crop"
+  },
+  {
+    "title": "Hímzés 101: Első öltések, amikkel kezdeni érdemes",
+    "excerpt": "Válaszd ki a megfelelő anyagokat és ismerd meg az első öltéseket.",
+    "content": "<p>Backstitch, satin stitch és francia csomó. Tippek a feszítőkeret használatához.</p>",
+    "author": "Bakó Júlia",
+    "dateISO": "2024-04-02",
+    "readMins": 6,
+    "tags": ["Hímzés"],
+    "cover": "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=1779&auto=format&fit=crop"
+  }
+]
